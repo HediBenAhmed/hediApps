@@ -1,6 +1,6 @@
 package com.hediapps.model.dashboard;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,13 +11,13 @@ public class Data {
 	private long id;
 
 	private String name;
-	private List<Double> values;
+	private Map<String, Double> values;
 
 	public Data() {
 
 	}
 
-	public Data(String name, List<Double> values) {
+	public Data(String name, Map<String, Double> values) {
 		super();
 		this.name = name;
 		this.values = values;
@@ -39,11 +39,11 @@ public class Data {
 		this.name = name;
 	}
 
-	public List<Double> getValues() {
+	public Map<String, Double> getValues() {
 		return values;
 	}
 
-	public void setValues(List<Double> values) {
+	public void setValues(Map<String, Double> values) {
 		this.values = values;
 	}
 

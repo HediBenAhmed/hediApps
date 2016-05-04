@@ -1,4 +1,3 @@
-
 <div class="row" style="margin-bottom: 5px;">
 	<div class="col-md-3">
 		<div class="sm-st clearfix">
@@ -40,12 +39,7 @@
 
 	<div class="col-md-8" data-ng-controller="dataCtrl as dataCtrl">
 		<!--earning graph start-->
-<section class="panel">
-	<header class="panel-heading"> Earning Graph </header>
-	<div class="panel-body">
-		<canvas id="linechart" width="600" height="330"></canvas>
-	</div>
-</section>
+<graph datas = "dataCtrl.datas"/>
 		<!--earning graph end-->
 
 	</div>

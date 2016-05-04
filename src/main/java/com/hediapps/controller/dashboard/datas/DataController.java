@@ -1,7 +1,8 @@
 package com.hediapps.controller.dashboard.datas;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 
@@ -34,7 +35,9 @@ public class DataController {
 		Data data = new Data();
 		data.setId(0);
 		data.setName("data");
-		data.setValues(new ArrayList<Double>());
+		Map<String, Double> values = new HashMap<String, Double>();
+		values.put("a", 0.5d);
+		data.setValues(values);
 		return data;
 	}
 

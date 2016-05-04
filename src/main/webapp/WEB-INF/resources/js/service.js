@@ -66,6 +66,7 @@ app.factory('loginService', [
 		'$http',
 		'$q',
 		function($http, $q) {
+			
 			return {
 
 				login : function(userName, pwd) {

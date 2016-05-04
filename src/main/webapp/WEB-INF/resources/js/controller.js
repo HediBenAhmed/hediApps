@@ -39,75 +39,33 @@ app.controller('taskCtrl', [
 			};
 		} ]);
 
-app
-		.controller(
-				'dataCtrl',
-				[
-						'$scope',
-						'dataService',
-						function($scope, dataService) {
+app.controller('dataCtrl', [
+		'$scope',
+		'dataService',
+		function($scope, dataService) {
 
-							var self = this;
-							self.datas = [];
-							self.colors = [ "rgba(60, 118, 61, 1)",
-									"rgba(169, 68, 66, 1)",
-									"rgba(49, 112, 143, 1)",
-									"rgba(120,120,120,1)" ];
+			var self = this;
+			self.datas = [];
 
-							self.findAllDatas = function() {
-								dataService
-										.findAllDatas()
-										.then(
-												function(datas) {
+			self.findAllDatas = function() {
+				return dataService.findAllDatas().then(function(datas) {
+					self.datas = datas;
+				}, function(errResponse) {
+					console.error('Error');
+				});
 
-													self.datas = datas;
-													var data = {
-														labels : [ "January",
-																"February",
-																"March",
-																"April", "May",
-																"June", "July" ],
-														datasets : []
-													};
-													for (var i = 0; i < datas.length; i++) {
+			};
 
-														var idColor = i
-																% self.colors.length;
+			self.findAllDatas();
 
-														var dataset = {
-															label : datas[i].name,
-															fillColor : "rgba(0,0,0,0)",
-															strokeColor : self.colors[idColor],
-															pointColor : self.colors[idColor],
-															pointStrokeColor : "#fff",
-															pointHighlightFill : "#fff",
-															pointHighlightStroke : self.colors[idColor],
-															data : datas[i].values
-														};
-
-														data.datasets[i] = dataset;
-													}	new Chart(document.getElementById("linechart").getContext("2d")).Line(data,
-															{
-														responsive : true,
-														maintainAspectRatio : false,
-													});
-												}, function(errResponse) {
-													console.error('Error');
-												});
-							};
-
-							self.findAllDatas();
-
-							$scope.findData = function() {
-								dataService.findData($scope.idData).then(
-										function(d) {
-											$scope.dataValue = JSON
-													.stringify(d);
-										}, function(errResponse) {
-											console.error('Error');
-										});
-							};
-						} ]);
+			$scope.findData = function() {
+				dataService.findData($scope.idData).then(function(d) {
+					$scope.dataValue = JSON.stringify(d);
+				}, function(errResponse) {
+					console.error('Error');
+				});
+			};
+		} ]);
 
 app.controller('loginCtrl', [
 		'$scope',
