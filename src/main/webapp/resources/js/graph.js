@@ -8,7 +8,7 @@ angular
 						scope : {
 							datasGraph : '=datas'
 						},
-						templateUrl : 'graph.html',
+						templateUrl : 'partials/graph.html',
 						link : function link(scope, element, attrs) {
 
 							scope

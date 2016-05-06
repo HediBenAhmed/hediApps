@@ -1,12 +1,25 @@
 package com.hediapps.rest.resources;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.hediapps.model.Data;
 import com.hediapps.service.DataService;
 
 @Component
@@ -17,45 +30,68 @@ public class DataResource {
 	@Autowired
 	private DataService dataService;
 
-	/*
-	 * @RequestMapping(value = "/dummy", method = RequestMethod.GET)
-	 * public @ResponseBody Data getDummyData(@CookieValue(value = "user")
-	 * Cookie userCookie) { logger.info("Start getDummyData"); Data data = new
-	 * Data(); data.setId(0); data.setName("data"); Map<String, Double> values =
-	 * new HashMap<String, Double>(); values.put("a", 0.5d);
-	 * data.setValues(values); return data; }
-	 * 
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	 * public @ResponseBody Data getData(@CookieValue(value = "user") Cookie
-	 * userCookie, @PathVariable("id") long dataId) { logger.info(
-	 * "Start getData. ID=" + dataId);
-	 * 
-	 * return dataService.readById(dataId); }
-	 * 
-	 * @RequestMapping(value = "/all", method = RequestMethod.GET)
-	 * public @ResponseBody List<Data> getAllDatas(@CookieValue(value = "user")
-	 * Cookie userCookie) { logger.info("Start getAllDatas.");
-	 * 
-	 * if (LoginController.checkToken(userCookie.getValue())) return
-	 * dataService.readAll(); else return null; }
-	 * 
-	 * @RequestMapping(value = "/create", method = RequestMethod.POST)
-	 * public @ResponseBody Data createData(@CookieValue(value = "user") Cookie
-	 * userCookie, @RequestBody Data data) { logger.info("Start createData.");
-	 * 
-	 * dataService.create(data); return data; }
-	 * 
-	 * @RequestMapping(value = "/update", method = RequestMethod.PUT)
-	 * public @ResponseBody Data updateData(@CookieValue(value = "user") Cookie
-	 * userCookie, @RequestBody Data data) { logger.info("Start updateNode.");
-	 * dataService.update(data); return data; }
-	 * 
-	 * @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
-	 * public @ResponseBody Data deleteData(@CookieValue(value = "user") Cookie
-	 * userCookie,
-	 * 
-	 * @PathVariable("id") long dataId) { logger.info("Start deleteData."); Data
-	 * data = dataService.readById(dataId); dataService.deleteById(dataId);
-	 * return data; }
-	 */
+	@Path("dummy")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Data getDummyData() {
+		logger.info("Start getDummyData");
+		Data data = new Data();
+		data.setId(0);
+		data.setName("data");
+		Map<String, Double> values = new HashMap<String, Double>();
+		values.put("a", 0.5d);
+		data.setValues(values);
+		return data;
+	}
+
+	@Path("/{id}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Data getData(@PathParam("id") long dataId) {
+		logger.info("Start getData. ID=" + dataId);
+
+		return dataService.readById(dataId);
+	}
+
+	@Path("/")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Data> getAllDatas() {
+		logger.info("Start getAllDatas.");
+		System.out.println("alll");
+		return dataService.readAll();
+	}
+
+	@Path("/")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Data createData(Data data) {
+		logger.info("Start createData.");
+		
+		dataService.create(data);
+		return data;
+	}
+
+	@Path("/")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Data updateData(Data data) {
+		logger.info("Start updateNode.");
+		dataService.update(data);
+		return data;
+	}
+
+	@Path("/{id}")
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	public Data deleteData(@PathParam("id") long dataId) {
+
+		logger.info("Start deleteData.");
+		Data data = dataService.readById(dataId);
+		dataService.deleteById(dataId);
+		return data;
+	}
+
 }
