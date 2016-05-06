@@ -1,4 +1,4 @@
-package com.hediapps.model.dashboard;
+package com.hediapps.model;
 
 import java.util.Date;
 

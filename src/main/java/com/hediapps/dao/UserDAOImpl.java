@@ -7,14 +7,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.hediapps.dao.DAO;
 import com.hediapps.model.User;
 
+@Repository
 public class UserDAOImpl implements DAO<User> {
 	@Autowired
 	MongoTemplate mongoTemplate;
 
+	@Transactional
 	public User create(User data) {
 		data.setId(getNextSequence());
 		mongoTemplate.insert(data);
@@ -22,6 +25,7 @@ public class UserDAOImpl implements DAO<User> {
 		return data;
 	}
 
+	@Transactional(readOnly = true)
 	public User findById(long id) {
 
 		// Query query = new Query();
@@ -35,6 +39,7 @@ public class UserDAOImpl implements DAO<User> {
 		return data;
 	}
 
+	@Transactional
 	public User update(User object) {
 		User data = findById(object.getId());
 
@@ -47,6 +52,7 @@ public class UserDAOImpl implements DAO<User> {
 		return object;
 	}
 
+	@Transactional
 	public User delete(long id) {
 		User data = findById(id);
 		if (data != null)
@@ -70,6 +76,7 @@ public class UserDAOImpl implements DAO<User> {
 			return lastData.getId() + 1l;
 	}
 
+	@Transactional(readOnly = true)
 	public List<User> findAll() {
 
 		Query query = new Query();
@@ -78,11 +85,23 @@ public class UserDAOImpl implements DAO<User> {
 		return mongoTemplate.find(query, User.class);
 	}
 
-	public User findByLoinAndPassword(String login, String password) {
+	@Transactional(readOnly = true)
+	public User findByUserNameAndPassword(String userName, String password) {
 
 		Query query = new Query();
-		query.addCriteria(Criteria.where("login").is(login).andOperator(Criteria.where("password").is(password)));
+		query.addCriteria(Criteria.where("username").is(userName).andOperator(Criteria.where("password").is(password)));
 
 		return mongoTemplate.findOne(query, User.class);
+	}
+
+	@Transactional(readOnly = true)
+	public User findByUserName(String username) {
+
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+
+		User user = mongoTemplate.findOne(query, User.class);
+
+		return user;
 	}
 }

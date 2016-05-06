@@ -11,7 +11,7 @@ app
 									"/",
 									{
 										templateUrl : "dashboard.html",
-										resolve : {
+										/*resolve : {
 											auth : [
 													"$window",
 													"loginService",
@@ -23,14 +23,6 @@ app
 														if ($window.location.href
 																.indexOf("login.html") == -1) {
 
-															/*
-															 * var userToken =
-															 * $cookies.get("user");
-															 * if(!userToken){
-															 * $window.location.href =
-															 * hostApp +
-															 * '/login.html'; }
-															 */
 
 															loginService
 																	.checkToken()
@@ -56,6 +48,6 @@ app
 																			});
 														}
 													} ]
-										}
+										}*/
 									});
 				} ]);

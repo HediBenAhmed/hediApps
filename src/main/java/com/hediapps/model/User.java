@@ -1,37 +1,54 @@
 package com.hediapps.model;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Document(collection = "common")
-public class User {
+public class User implements UserDetails {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private long id;
 
-	private String login;
+	private String username;
 	private String password;
 	private String passwordSalt;
 	private String email;
 
-	private boolean verified;
-	private boolean active;
-	private boolean admin;
+	private Set<Role> authorities = new HashSet<Role>();
+
+	private boolean credentialsNonExpired;
+	private boolean enabled;
+	private boolean accountNonLocked;
+	private boolean accountNonExpired;
 
 	public User() {
 		super();
 	}
 
-	public User(long id, String login, String password, String passwordSalt, String email, boolean verified,
-			boolean active, boolean admin) {
+	public User(long id, String username, String password, String passwordSalt, String email, boolean enabled,
+			Set<Role> authorities) {
 		super();
 		this.id = id;
-		this.login = login;
+		this.username = username;
 		this.password = password;
 		this.passwordSalt = passwordSalt;
 		this.email = email;
-		this.verified = verified;
-		this.active = active;
-		this.admin = admin;
+		this.credentialsNonExpired = true;
+		this.enabled = true;
+		this.accountNonExpired = true;
+		this.accountNonLocked = true;
+		this.enabled = enabled;
+		this.authorities = authorities;
 	}
 
 	public long getId() {
@@ -42,12 +59,8 @@ public class User {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 	public String getPassword() {
@@ -74,34 +87,42 @@ public class User {
 		this.email = email;
 	}
 
-	public boolean isVerified() {
-		return verified;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
-	public void setVerified(boolean verified) {
-		this.verified = verified;
+	public void setAuthorities(Set<Role> authorities) {
+		this.authorities = authorities;
 	}
 
-	public boolean isActive() {
-		return active;
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return this.authorities;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public boolean isAdmin() {
-		return admin;
+	public boolean isAccountNonExpired() {
+		return this.accountNonExpired;
 	}
 
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public boolean isAccountNonLocked() {
+		return this.accountNonLocked;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return this.credentialsNonExpired;
+	}
+
+	public boolean isEnabled() {
+		return this.enabled;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", password=" + password + ", passwordSalt=" + passwordSalt
-				+ ", email=" + email + ", verified=" + verified + ", active=" + active + ", admin=" + admin + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt=" + passwordSalt
+				+ ", email=" + email + ", credentialsNonExpired=" + credentialsNonExpired + ", enabled=" + enabled
+				+ ", authorities=" + authorities + "]";
 	}
-
 }

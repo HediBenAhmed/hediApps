@@ -1,4 +1,4 @@
-package com.hediapps.service.dashboard;
+package com.hediapps.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hediapps.dao.dashboard.TaskDAOImpl;
-import com.hediapps.model.dashboard.Task;
+import com.hediapps.dao.TaskDAOImpl;
+import com.hediapps.model.Task;
 
 @Service
 public class TaskService {
