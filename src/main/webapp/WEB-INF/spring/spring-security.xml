@@ -13,22 +13,21 @@
 		<custom-filter ref="authenticationTokenProcessingFilter"
 			position="PRE_AUTH_FILTER" />
 		<intercept-url pattern="/rest/loginService/**" access="permitAll" />
-		<intercept-url method="GET" pattern="/rest/user/**"
+		<intercept-url pattern="/rest/user/**"
 			access="hasRole('ADMIN')" />
 	</http>
 
 	<beans:bean id="passwordEncoder"
-		class="org.springframework.security.crypto.password.StandardPasswordEncoder">
-		<beans:constructor-arg value="${app.secret}" />
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 	</beans:bean>
 
 	<authentication-manager id="authenticationManager">
 		<authentication-provider user-service-ref="userService">
+			<password-encoder ref="passwordEncoder" />
 		</authentication-provider>
 	</authentication-manager>
 
-	<beans:bean id="unauthorizedEntryPoint"
-		class="com.hediapps.rest.UnauthorizedEntryPoint" />
+	<beans:bean id="unauthorizedEntryPoint" class="com.hediapps.rest.UnauthorizedEntryPoint" />
 
 	<beans:bean id="authenticationTokenProcessingFilter"
 		class="com.hediapps.rest.AuthenticationTokenProcessingFilter">

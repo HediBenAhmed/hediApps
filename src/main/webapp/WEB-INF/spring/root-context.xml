@@ -28,8 +28,8 @@
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 	</beans:bean>
 
-	<mongo:mongo host="localhost" port="27017" id="mongo" />
-	<mongo:db-factory dbname="hediapps" mongo-ref="mongo"
+	<mongo:mongo host="${db.host}" port="${db.port}" id="mongo" />
+	<mongo:db-factory dbname="${db.dbname}" mongo-ref="mongo"
 		id="mongoDbFactory" />
 
 	<beans:bean id="mongoTemplate"

@@ -21,7 +21,6 @@ public class User implements UserDetails {
 
 	private String username;
 	private String password;
-	private String passwordSalt;
 	private String email;
 
 	private Set<Role> authorities = new HashSet<Role>();
@@ -35,13 +34,11 @@ public class User implements UserDetails {
 		super();
 	}
 
-	public User(long id, String username, String password, String passwordSalt, String email, boolean enabled,
-			Set<Role> authorities) {
+	public User(long id, String username, String password, String email, boolean enabled, Set<Role> authorities) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.passwordSalt = passwordSalt;
 		this.email = email;
 		this.credentialsNonExpired = true;
 		this.enabled = true;
@@ -69,14 +66,6 @@ public class User implements UserDetails {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPasswordSalt() {
-		return passwordSalt;
-	}
-
-	public void setPasswordSalt(String passwordSalt) {
-		this.passwordSalt = passwordSalt;
 	}
 
 	public String getEmail() {
@@ -121,8 +110,8 @@ public class User implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", passwordSalt=" + passwordSalt
-				+ ", email=" + email + ", credentialsNonExpired=" + credentialsNonExpired + ", enabled=" + enabled
-				+ ", authorities=" + authorities + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", credentialsNonExpired=" + credentialsNonExpired + ", enabled=" + enabled + ", authorities="
+				+ authorities + "]";
 	}
 }

@@ -1,10 +1,16 @@
 package com.hediapps.rest.resources;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -33,44 +39,56 @@ public class UserResource {
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(Role.ADMIN);
 
-		User data = new User(1l, "user@com", "pwd", "pwdSal", "email@com", true, roles);
+		User data = new User(1l, "user@com", "pwd", "email@com", true, roles);
 
 		return data;
 	}
 
-	/*
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	 * public @ResponseBody User getUser(@CookieValue(value = "user") Cookie
-	 * userCookie, @PathVariable("id") long userId) { logger.info(
-	 * "Start getUser. ID=" + userId);
-	 * 
-	 * return userService.readById(userId); }
-	 * 
-	 * @RequestMapping(value = "/", method = RequestMethod.GET)
-	 * public @ResponseBody List<User> getAllUsers(@CookieValue(value = "user")
-	 * Cookie userCookie) { logger.info("Start getAllUsers."); return
-	 * userService.readAll(); }
-	 * 
-	 * @RequestMapping(value = "/", method = RequestMethod.POST)
-	 * public @ResponseBody User createUser(@CookieValue(value = "user") Cookie
-	 * userCookie, @RequestBody User data) { logger.info("Start createUser.");
-	 * 
-	 * userService.create(data); return data; }
-	 * 
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	 * public @ResponseBody User updateUser(@CookieValue(value = "user") Cookie
-	 * userCookie,
-	 * 
-	 * @PathVariable("id") long userId, @RequestBody User data) { logger.info(
-	 * "Start updateNode."); userService.update(data); return data; }
-	 * 
-	 * @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	 * public @ResponseBody User deleteUser(@CookieValue(value = "user") Cookie
-	 * userCookie,
-	 * 
-	 * @PathVariable("id") long dataId) { logger.info("Start deleteUser."); User
-	 * data = userService.readById(dataId); userService.deleteById(dataId);
-	 * return data; }
-	 */
+	@Path("/{id}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@PathParam("id") long userId) {
+		logger.info("Start getUser. ID=" + userId);
 
+		return userService.readById(userId);
+	}
+
+	@Path("/")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getAllUsers() {
+		logger.info("Start getAllUsers.");
+		return userService.readAll();
+	}
+
+	@Path("/")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User createUser(User data) {
+		logger.info("Start createUser.");
+
+		userService.create(data);
+		return data;
+	}
+
+	@Path("/")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User updateUser(User data) {
+		logger.info("Start updateNode.");
+		userService.update(data);
+		return data;
+	}
+
+	@Path("/{id}")
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	public User deleteUser(@PathParam("id") long dataId) {
+		logger.info("Start deleteUser.");
+		User data = userService.readById(dataId);
+		userService.deleteById(dataId);
+		return data;
+	}
 }
