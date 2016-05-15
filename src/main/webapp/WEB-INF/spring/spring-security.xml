@@ -13,8 +13,9 @@
 		<custom-filter ref="authenticationTokenProcessingFilter"
 			position="PRE_AUTH_FILTER" />
 		<intercept-url pattern="/rest/loginService/**" access="permitAll" />
-		<intercept-url pattern="/rest/user/**"
-			access="hasRole('ADMIN')" />
+		<intercept-url pattern="/rest/user/**" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/rest/data/**" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/rest/task/**" access="hasRole('ADMIN')" />
 	</http>
 
 	<beans:bean id="passwordEncoder"

@@ -9,34 +9,34 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.hediapps.model.Data;
+import com.hediapps.model.Message;
 
 @Repository
-public class DataDAOImpl implements DAO<Data> {
+public class MessageDAOImpl implements DAO<Message> {
 	@Autowired
 	MongoTemplate mongoTemplate;
 
-	public Data create(Data data) {
+	public Message create(Message data) {
 		data.setId(getNextSequence());
 		mongoTemplate.insert(data);
 
 		return data;
 	}
 
-	public Data findById(long id) {
+	public Message findById(long id) {
 
 		// Query query = new Query();
 		// query.addCriteria(Criteria.where("name").is(data.getName())
 		// .and("value").is(data.getValue()));
 		//
 		// List<Data> datas = mongoTemplate.find(query, Data.class);
-		Data data = mongoTemplate.findById(id, Data.class);
+		Message data = mongoTemplate.findById(id, Message.class);
 
 		return data;
 	}
 
-	public Data update(Data object) {
-		Data data = findById(object.getId());
+	public Message update(Message object) {
+		Message data = findById(object.getId());
 
 		if (data == null) {
 			return null;
@@ -47,8 +47,8 @@ public class DataDAOImpl implements DAO<Data> {
 		return object;
 	}
 
-	public Data delete(long id) {
-		Data data = findById(id);
+	public Message delete(long id) {
+		Message data = findById(id);
 		if (data != null)
 			mongoTemplate.remove(data);
 		return data;
@@ -60,7 +60,7 @@ public class DataDAOImpl implements DAO<Data> {
 		query.limit(1);
 		query.with(new Sort(Sort.Direction.DESC, "_id"));
 
-		Data lastData = mongoTemplate.findOne(query, Data.class);
+		Message lastData = mongoTemplate.findOne(query, Message.class);
 
 		if (lastData == null)
 			return 1l;
@@ -68,12 +68,19 @@ public class DataDAOImpl implements DAO<Data> {
 			return lastData.getId() + 1l;
 	}
 
-	public List<Data> findAll() {
+	public List<Message> findAll() {
 
 		Query query = new Query();
-		query.addCriteria(Criteria.where("_class").is(Data.class.getName()));
+		query.addCriteria(Criteria.where("_class").is(Message.class.getName()));
 
-		return mongoTemplate.find(query, Data.class);
+		return mongoTemplate.find(query, Message.class);
 	}
 
+	public List<Message> findByToUserId(long toUser) {
+
+		Query query = new Query();
+		query.addCriteria(Criteria.where("toUser").is(toUser));
+
+		return mongoTemplate.find(query, Message.class);
+	}	
 }

@@ -34,7 +34,6 @@ public class UserDAOImpl implements DAO<User> {
 		//
 		// List<Data> datas = mongoTemplate.find(query, Data.class);
 		User data = mongoTemplate.findById(id, User.class);
-		System.out.println(data);
 
 		return data;
 	}
@@ -67,8 +66,6 @@ public class UserDAOImpl implements DAO<User> {
 		query.with(new Sort(Sort.Direction.DESC, "_id"));
 
 		User lastData = mongoTemplate.findOne(query, User.class);
-
-		System.out.println(lastData);
 
 		if (lastData == null)
 			return 1l;

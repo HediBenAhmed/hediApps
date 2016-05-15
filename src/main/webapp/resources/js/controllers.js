@@ -48,7 +48,7 @@ app.controller('dataCtrl', [ '$scope', 'dataService',
 
 			self.findAllDatas = function() {
 				dataService.query(function(datas) {
-					
+
 					self.datas = datas;
 				}, function(errResponse) {
 					console.error('Error');
@@ -69,12 +69,15 @@ app.controller('dataCtrl', [ '$scope', 'dataService',
 			};
 		} ]);
 
-app.controller('loginCtrl', [ '$scope', '$rootScope', '$location',
-		'loginService', '$cookieStore',
-		function($scope, $rootScope, $location, loginService, $cookieStore) {
+app.controller('loginCtrl', [
+		'$scope',
+		'$rootScope',
+		'$location',
+		'loginService',
+		'$cookies',
+		function($scope, $rootScope, $location, loginService, $cookies) {
 
 			$scope.login = function() {
-
 				loginService.authenticate($.param({
 					username : $scope.username,
 					password : $scope.password
@@ -82,14 +85,37 @@ app.controller('loginCtrl', [ '$scope', '$rootScope', '$location',
 
 					var authToken = authenticationResult.token;
 					$rootScope.authToken = authToken;
+
 					if ($scope.rememberMe) {
-						$cookieStore.put('authToken', authToken);
+						var now = new Date();
+						// this will set the expiration to 12 months
+						var exp = new Date(now.getFullYear() + 1, now
+								.getMonth(), now.getDate());
+
+						$cookies.put('authToken', authToken, {
+							expires : exp
+						});
+					} else {
+						$cookies.put('authToken', authToken);
 					}
+					
 					loginService.getCurrent(function(user) {
 						$rootScope.user = user;
+						$scope.name = user.name;
 						$location.path("/");
 					});
 				});
 
+			};
+			
+			$scope.logout = function() {
+				delete $rootScope.user;
+				delete $rootScope.authToken;
+				$cookies.remove('authToken');
+				$location.path("/login");
+			};
+			
+			$scope.currentUser = function() {
+				return $rootScope.user;
 			};
 		} ]);

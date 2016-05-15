@@ -28,7 +28,6 @@ public class TaskDAOImpl implements DAO<Task> {
 	public Task findById(long id) {
 
 		Task data = mongoTemplate.findById(id, Task.class);
-		System.out.println(data);
 
 		return data;
 	}
@@ -59,8 +58,6 @@ public class TaskDAOImpl implements DAO<Task> {
 		query.with(new Sort(Sort.Direction.DESC, "_id"));
 
 		Task lastData = mongoTemplate.findOne(query, Task.class);
-
-		System.out.println(lastData);
 
 		if (lastData == null)
 			return 1l;

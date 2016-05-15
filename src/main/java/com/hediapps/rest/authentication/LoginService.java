@@ -2,6 +2,7 @@ package com.hediapps.rest.authentication;
 
 import java.security.Key;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.FormParam;
@@ -22,6 +23,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.hediapps.model.Message;
+import com.hediapps.model.User;
 import com.hediapps.rest.transfer.TokenTransfer;
 import com.hediapps.rest.transfer.UserTransfer;
 import com.hediapps.rest.utils.TokenUtils;
@@ -40,39 +43,6 @@ public class LoginService {
 	private AuthenticationManager authManager;
 
 	public final static Key KEY = MacProvider.generateKey();
-
-	/*
-	 * @RequestMapping(value = "/logout", method = RequestMethod.GET)
-	 * public @ResponseBody void logout(@CookieValue(value = "user") Cookie
-	 * userCookie, HttpServletResponse response) {
-	 * 
-	 * Cookie newCookie = new Cookie("user", null); newCookie.setPath("/");
-	 * newCookie.setMaxAge(0);
-	 * 
-	 * response.addCookie(newCookie); }
-	 * 
-	 * @RequestMapping(value = "/checkToken", method = RequestMethod.GET)
-	 * public @ResponseBody String isValidTocken(@CookieValue(value = "user",
-	 * required = false) Cookie userCookie) { if (userCookie == null) return
-	 * "{\"valid\" : false}"; if
-	 * (LoginController.checkToken(userCookie.getValue())) { return
-	 * "{\"valid\" : true}"; } else return "{\"valid\" : false}"; }
-	 * 
-	 * public static boolean checkToken(String token) { try {
-	 * 
-	 * Claims claims =
-	 * Jwts.parser().setSigningKey(LoginController.KEY).parseClaimsJws(token).
-	 * getBody();
-	 * 
-	 * String userJson = claims.getSubject();
-	 * 
-	 * Gson gson = new Gson();
-	 * 
-	 * System.out.println(gson.fromJson(userJson, User.class));
-	 * 
-	 * return true; } catch (SignatureException e) { e.printStackTrace(); return
-	 * false; } }
-	 */
 
 	/**
 	 * Authenticates a user and creates an authentication token.
@@ -114,9 +84,11 @@ public class LoginService {
 			throw new WebApplicationException(401);
 		}
 
-		UserDetails userDetails = (UserDetails) principal;
+		User userDetails = (User) principal;
 
-		return new UserTransfer(userDetails.getUsername(), this.createRoleMap(userDetails));
+		List<Message> messages = userService.getMessages(userDetails.getId(), false);
+
+		return new UserTransfer(userDetails.getUsername(), this.createRoleMap(userDetails), messages.size(), 0);
 	}
 
 	private Map<String, Boolean> createRoleMap(UserDetails userDetails) {

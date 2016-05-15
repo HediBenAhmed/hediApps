@@ -24,7 +24,7 @@ app
 								templateUrl : 'partials/dashboard.html'
 							});
 
-							$locationProvider.hashPrefix('!');
+							//$locationProvider.hashPrefix('!');
 
 							/*
 							 * Register error provider that shows message on
@@ -86,7 +86,7 @@ app
 
 						} ]
 
-		).run(function($rootScope, $location, $cookieStore, loginService) {
+		).run(function($rootScope, $location, $cookies, loginService) {
 
 			/* Reset error when a new view is loaded */
 			$rootScope.$on('$viewContentLoaded', function() {
@@ -106,18 +106,11 @@ app
 				return $rootScope.user.roles[role];
 			};
 
-			$rootScope.logout = function() {
-				delete $rootScope.user;
-				delete $rootScope.authToken;
-				$cookieStore.remove('authToken');
-				$location.path("/login");
-			};
-
 			/* Try getting valid user from cookie or go to login page */
 			var originalPath = $location.path();
 
 			$location.path("/login");
-			var authToken = $cookieStore.get('authToken');
+			var authToken = $cookies.get('authToken');
 			if (authToken !== undefined) {
 				$rootScope.authToken = authToken;
 				loginService.getCurrent(function(user) {

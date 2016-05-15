@@ -58,7 +58,6 @@ public class DataResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Data> getAllDatas() {
 		logger.info("Start getAllDatas.");
-		System.out.println("alll");
 		return dataService.readAll();
 	}
 

@@ -36,12 +36,20 @@
 		class="org.springframework.data.mongodb.core.MongoTemplate">
 		<beans:constructor-arg name="mongoDbFactory"
 			ref="mongoDbFactory" />
+		<!-- <beans:constructor-arg ref="mappingConverter" /> -->
 	</beans:bean>
+
+	<!-- <mongo:mapping-converter id="mappingConverter">
+		<mongo:custom-converters base-package="com.hediapps.model.converter" />
+	</mongo:mapping-converter> -->
 
 	<beans:bean id="taskService" class="com.hediapps.service.TaskService">
 	</beans:bean>
 
 	<beans:bean id="dataService" class="com.hediapps.service.DataService">
+	</beans:bean>
+
+	<beans:bean id="messageService" class="com.hediapps.service.MessageService">
 	</beans:bean>
 
 	<beans:bean id="userService" class="com.hediapps.service.UserService">

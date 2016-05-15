@@ -1,5 +1,6 @@
 package com.hediapps.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hediapps.dao.MessageDAOImpl;
 import com.hediapps.dao.UserDAOImpl;
+import com.hediapps.model.Message;
 import com.hediapps.model.User;
 
 @Service
@@ -17,6 +20,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserDAOImpl userDAO;
+
+	@Autowired
+	private MessageDAOImpl messageDAO;
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -58,5 +64,21 @@ public class UserService implements UserDetailsService {
 		}
 
 		return user;
+	}
+
+	public List<Message> getMessages(Long userId, boolean isRead) {
+		List<Message> messages = messageDAO.findByToUserId(userId);
+
+		if (messages != null && !messages.isEmpty()) {
+			List<Message> filtredMessages = new ArrayList<Message>();
+			for (Message msg : messages) {
+				if (msg.isRead() == isRead) {
+					filtredMessages.add(msg);
+				}
+			}
+
+			return filtredMessages;
+		}
+		return messages;
 	}
 }
