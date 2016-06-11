@@ -1,5 +1,6 @@
 package com.hediapps.rest.resources;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,12 +20,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.hediapps.model.Message;
 import com.hediapps.model.Role;
 import com.hediapps.model.User;
+import com.hediapps.rest.transfer.MessageTransfer;
+import com.hediapps.rest.transfer.UserTransfer;
 import com.hediapps.service.UserService;
 
 @Component
-@Path("/user")
+@Path("/users")
 public class UserResource {
 	private static final Logger logger = LoggerFactory.getLogger(UserResource.class);
 
@@ -39,7 +43,7 @@ public class UserResource {
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(Role.ADMIN);
 
-		User data = new User(1l, "user@com", "pwd", "email@com", true, roles);
+		User data = new User(1l, "user", "user", "pwd", "email@com", true, roles);
 
 		return data;
 	}
@@ -90,5 +94,31 @@ public class UserResource {
 		User data = userService.readById(dataId);
 		userService.deleteById(dataId);
 		return data;
+	}
+
+	@Path("/{id}/messages")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<MessageTransfer> getMessages(@PathParam("id") long userId) {
+
+		List<Message> messages = userService.getMessages(userId);
+
+		List<MessageTransfer> messagesTransfer = null;
+		if (messages != null) {
+			messagesTransfer = new ArrayList<MessageTransfer>();
+			for (Message message : messages) {
+
+				User from = userService.readById(message.getFromUser());
+
+				MessageTransfer messageTransfer = new MessageTransfer(
+						new UserTransfer(from.getId(), from.getFirstName(), from.getLastName(), from.getEmail(), null,
+								0, 0),
+						null, message.getCreationDate(), message.getSubject(), message.getText(), message.isRead());
+
+				messagesTransfer.add(messageTransfer);
+			}
+		}
+
+		return messagesTransfer;
 	}
 }

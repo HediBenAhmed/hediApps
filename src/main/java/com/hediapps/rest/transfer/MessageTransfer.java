@@ -4,7 +4,7 @@ public class MessageTransfer {
 
 	private UserTransfer fromUser;
 	private UserTransfer toUser;
-	private String creationDate;
+	private long creationDate;
 	private String subject;
 	private String text;
 	private boolean read;
@@ -13,12 +13,13 @@ public class MessageTransfer {
 
 	}
 
-	public MessageTransfer(UserTransfer fromUser, UserTransfer toUser, String creationDate, String subject, String text,
+	public MessageTransfer(UserTransfer fromUser, UserTransfer toUser, long creationDate, String subject, String text,
 			boolean read) {
 		super();
 		this.fromUser = fromUser;
 		this.toUser = toUser;
 		this.creationDate = creationDate;
+		
 		this.subject = subject;
 		this.text = text;
 		this.read = read;
@@ -40,11 +41,11 @@ public class MessageTransfer {
 		this.toUser = toUser;
 	}
 
-	public String getCreationDate() {
+	public long getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(String creationDate) {
+	public void setCreationDate(long creationDate) {
 		this.creationDate = creationDate;
 	}
 

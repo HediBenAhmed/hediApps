@@ -88,7 +88,8 @@ public class LoginService {
 
 		List<Message> messages = userService.getMessages(userDetails.getId(), false);
 
-		return new UserTransfer(userDetails.getUsername(), this.createRoleMap(userDetails), messages.size(), 0);
+		return new UserTransfer(userDetails.getId(), userDetails.getFirstName(), userDetails.getLastName(),
+				userDetails.getEmail(), this.createRoleMap(userDetails), messages.size(), 0);
 	}
 
 	private Map<String, Boolean> createRoleMap(UserDetails userDetails) {

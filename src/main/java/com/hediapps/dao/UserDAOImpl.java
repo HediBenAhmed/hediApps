@@ -83,19 +83,10 @@ public class UserDAOImpl implements DAO<User> {
 	}
 
 	@Transactional(readOnly = true)
-	public User findByUserNameAndPassword(String userName, String password) {
+	public User findByEmail(String email) {
 
 		Query query = new Query();
-		query.addCriteria(Criteria.where("username").is(userName).andOperator(Criteria.where("password").is(password)));
-
-		return mongoTemplate.findOne(query, User.class);
-	}
-
-	@Transactional(readOnly = true)
-	public User findByUserName(String username) {
-
-		Query query = new Query();
-		query.addCriteria(Criteria.where("username").is(username));
+		query.addCriteria(Criteria.where("email").is(email));
 
 		User user = mongoTemplate.findOne(query, User.class);
 

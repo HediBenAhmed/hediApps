@@ -4,14 +4,14 @@ var services = angular.module('myApp.loginService', [ 'ngResource' ]);
 
 services.factory('taskService', function($resource) {
 
-	return $resource('rest/task/:id', {
+	return $resource('rest/tasks/:id', {
 		id : '@id'
 	});
 });
 
 services.factory('dataService', function($resource) {
 
-	return $resource('rest/data/:id', {
+	return $resource('rest/datas/:id', {
 		id : '@id'
 	});
 });
@@ -32,6 +32,20 @@ services.factory('loginService', function($resource) {
 			method : 'GET',
 			params : {
 				'action' : 'current'
+			}
+		}
+	});
+});
+
+services.factory('userService', function($resource) {
+
+	return $resource('rest/users/:id/:action', {}, {
+		getMessages : {
+			method : 'GET',
+			isArray : true,
+			params : {
+				'id' : '@id',
+				'action' : 'messages'
 			}
 		}
 	});

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.hediapps.service.TaskService;
 
 @Component
-@Path("/task")
+@Path("/tasks")
 public class TaskResource {
 	private static final Logger logger = LoggerFactory.getLogger(TaskResource.class);
 

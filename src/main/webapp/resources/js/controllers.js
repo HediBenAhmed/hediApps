@@ -98,7 +98,7 @@ app.controller('loginCtrl', [
 					} else {
 						$cookies.put('authToken', authToken);
 					}
-					
+
 					loginService.getCurrent(function(user) {
 						$rootScope.user = user;
 						$scope.name = user.name;
@@ -107,15 +107,88 @@ app.controller('loginCtrl', [
 				});
 
 			};
-			
+
 			$scope.logout = function() {
 				delete $rootScope.user;
 				delete $rootScope.authToken;
 				$cookies.remove('authToken');
 				$location.path("/login");
 			};
-			
+
 			$scope.currentUser = function() {
 				return $rootScope.user;
 			};
 		} ]);
+
+app
+		.controller(
+				'userCtrl',
+				[
+						'$scope',
+						'$rootScope',
+						'$location',
+						'userService',
+						'$cookies',
+						function($scope, $rootScope, $location, userService,
+								$cookies) {
+
+							$scope.getMessages = function() {
+								userService
+										.getMessages(
+												{
+													id : $rootScope.user.id
+												},
+												function(messages) {
+													var messagesMenu = angular
+															.element(document
+																	.querySelector('#messagesMenu'));
+													var currentDate = Date
+															.now();
+													for (var i = 0; i < messages.length; i++) {
+
+														var message = messages[i];
+
+														var delai = (currentDate - message.creationDate)
+																/ (1000 * 60);
+
+														if (delai >= 60) {
+															delai = delai / 60;
+
+															if (delai >= 24) {
+																delai = delai / 24;
+
+																if (delai >= 30) {
+																	delai = delai / 30;
+
+																	delai = Math
+																			.round(delai)
+																			+ " months";
+																} else {
+																	delai = Math
+																			.round(delai)
+																			+ " days";
+																}
+															} else {
+																delai = Math
+																		.round(delai)
+																		+ " hours";
+															}
+														} else {
+															delai = Math
+																	.round(delai)
+																	+ " mins";
+														}
+
+														messagesMenu
+																.append('<li><a href><div class="pull-left"><img src="resources/img/26115.jpg" class="img-circle" alt="User Image" /></div><h4>'
+																		+ message.fromUser.name
+																		+ '</h4><p>'
+																		+ message.subject
+																		+ '</p> <small class="pull-right"><i class="fa fa-clock-o"></i> '
+																		+ delai
+																		+ '</small></a></li>');
+													}
+												});
+							};
+
+						} ]);

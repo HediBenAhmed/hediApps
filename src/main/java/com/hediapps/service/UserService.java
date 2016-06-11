@@ -37,12 +37,6 @@ public class UserService implements UserDetailsService {
 		return this.userDAO.findById(id);
 	}
 
-	public User findByUserNameAndPassword(String username, String password) {
-
-		String encryptedPwd = passwordEncoder.encode(password);
-		return this.userDAO.findByUserNameAndPassword(username, encryptedPwd);
-	}
-
 	public void update(User user) {
 		this.userDAO.update(user);
 	}
@@ -55,19 +49,24 @@ public class UserService implements UserDetailsService {
 		return userDAO.findAll();
 	}
 
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-		User user = this.userDAO.findByUserName(username);
+		User user = this.userDAO.findByEmail(email);
 
 		if (null == user) {
-			throw new UsernameNotFoundException("The user with name " + username + " was not found");
+			throw new UsernameNotFoundException("The user with name " + email + " was not found");
 		}
 
 		return user;
 	}
 
-	public List<Message> getMessages(Long userId, boolean isRead) {
+	public List<Message> getMessages(Long userId) {
 		List<Message> messages = messageDAO.findByToUserId(userId);
+		return messages;
+	}
+
+	public List<Message> getMessages(Long userId, boolean isRead) {
+		List<Message> messages = getMessages(userId);
 
 		if (messages != null && !messages.isEmpty()) {
 			List<Message> filtredMessages = new ArrayList<Message>();

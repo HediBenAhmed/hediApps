@@ -23,7 +23,7 @@ import com.hediapps.model.Data;
 import com.hediapps.service.DataService;
 
 @Component
-@Path("/data")
+@Path("/datas")
 public class DataResource {
 	private static final Logger logger = LoggerFactory.getLogger(DataResource.class);
 

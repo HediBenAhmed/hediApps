@@ -3,7 +3,6 @@ package com.hediapps.model;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "common")
@@ -13,9 +12,6 @@ public class Message {
 	private long id;
 
 	private long fromUser;
-
-	@Transient
-	private String fromUserName;
 
 	private long toUser;
 	private long creationDate;
@@ -96,14 +92,6 @@ public class Message {
 
 	public void setRead(boolean read) {
 		this.read = read;
-	}
-
-	public String getFromUserName() {
-		return fromUserName;
-	}
-
-	public void setFromUserName(String fromUserName) {
-		this.fromUserName = fromUserName;
 	}
 
 	@Override

@@ -19,7 +19,10 @@ public class User implements UserDetails {
 	@Id
 	private long id;
 
-	private String username;
+	private String firstName;
+
+	private String lastName;
+
 	private String password;
 	private String email;
 
@@ -34,10 +37,12 @@ public class User implements UserDetails {
 		super();
 	}
 
-	public User(long id, String username, String password, String email, boolean enabled, Set<Role> authorities) {
+	public User(long id, String firstName, String lastName, String password, String email, boolean enabled,
+			Set<Role> authorities) {
 		super();
 		this.id = id;
-		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.password = password;
 		this.email = email;
 		this.credentialsNonExpired = true;
@@ -54,10 +59,6 @@ public class User implements UserDetails {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public void setUsername(String userName) {
-		this.username = userName;
 	}
 
 	public String getPassword() {
@@ -89,7 +90,7 @@ public class User implements UserDetails {
 	}
 
 	public String getUsername() {
-		return this.username;
+		return this.email;
 	}
 
 	public boolean isAccountNonExpired() {
@@ -110,8 +111,23 @@ public class User implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", credentialsNonExpired=" + credentialsNonExpired + ", enabled=" + enabled + ", authorities="
-				+ authorities + "]";
+		return "User [id=" + id + ", password=" + password + ", email=" + email + ", credentialsNonExpired="
+				+ credentialsNonExpired + ", enabled=" + enabled + ", authorities=" + authorities + "]";
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 }

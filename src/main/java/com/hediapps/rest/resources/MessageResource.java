@@ -22,7 +22,7 @@ import com.hediapps.model.Message;
 import com.hediapps.service.MessageService;
 
 @Component
-@Path("/message")
+@Path("/messages")
 public class MessageResource {
 	private static final Logger logger = LoggerFactory.getLogger(MessageResource.class);
 
