@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<i class="fa fa-table fa-fw"></i> {{nameTable}}
+		<div class="pull-right">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default btn-xs dropdown-toggle"
+					data-toggle="dropdown">
+					Actions <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu pull-right" role="menu">
+					<li><a href="#">Action</a></li>
+					<li><a href="#">Another action</a></li>
+					<li><a href="#">Something else here</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Separated link</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /.panel-heading -->
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						<th ng-repeat="header in headers">{{header}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="ligne in lignes">
+						<td ng-repeat="value in ligne.data">{{value}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- /.table-responsive -->
+	</div>
+	<!-- /.panel-body -->
+</div>
+<!-- /.panel -->
