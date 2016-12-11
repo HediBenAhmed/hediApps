@@ -1,334 +1,388 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>Director | Dashboard</title>
-<meta
-	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
-	name='viewport'>
-<meta name="description" content="Developed By M Abdur Rokib Promy">
-<meta name="keywords"
-	content="Admin, Bootstrap 3, Template, Theme, Responsive">
-<!-- bootstrap 3.0.2 -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
-<!-- font Awesome -->
-<link href="resources/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css" />
-<!-- Ionicons -->
-<link href="resources/css/ionicons.min.css" rel="stylesheet"
-	type="text/css" />
-<!-- Morris chart -->
-<link href="resources/css/morris/morris.css" rel="stylesheet"
-	type="text/css" />
-<!-- jvectormap -->
-<link href="resources/css/jvectormap/jquery-jvectormap-1.2.2.css"
-	rel="stylesheet" type="text/css" />
-<!-- Date Picker -->
-<link href="resources/css/datepicker/datepicker3.css" rel="stylesheet"
-	type="text/css" />
-<!-- fullCalendar -->
-<!-- <link href="css/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" /> -->
-<!-- Daterange picker -->
-<link href="resources/css/daterangepicker/daterangepicker-bs3.css"
-	rel="stylesheet" type="text/css" />
-<!-- iCheck for checkboxes and radio inputs -->
-<link href="resources/css/iCheck/all.css" rel="stylesheet"
-	type="text/css" />
-<!-- bootstrap wysihtml5 - text editor -->
-<!-- <link href="resources/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" /> -->
-<link href='http://fonts.googleapis.com/css?family=Lato'
-	rel='stylesheet' type='text/css'>
-<!-- Theme style -->
-<link href="resources/css/style.css" rel="stylesheet" type="text/css" />
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
 
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-          <![endif]-->
+    <!-- Bootstrap Core CSS -->
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<style type="text/css">
-</style>
+    <!-- MetisMenu CSS -->
+    <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
-<script src="resources/js/angular.min.js"></script>
-<script src="resources/js/angular-resource.min.js"></script>
-<script src="resources/js/angular-route.min.js"></script>
-<script src="resources/js/angular-cookies.min.js"></script>
+    <!-- Timeline CSS -->
+    <link href="dist/css/timeline.css" rel="stylesheet">
 
-<script src="resources/js/graph.js"></script>
+    <!-- Custom CSS -->
+    <link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
+    <!-- Morris Charts CSS -->
+    <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
 
-<script src="resources/js/services.js"></script>
-<script src="resources/js/app.js"></script>
-<script src="resources/js/controllers.js"></script>
+    <!-- Custom Fonts -->
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-<!-- jQuery 2.0.2 -->
-<script src="resources/js/jquery.min.js" type="text/javascript"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+        <!-- jQuery -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-<!-- jQuery UI 1.10.3 -->
-<script src="resources/js/jquery-ui-1.10.3.min.js"
-	type="text/javascript"></script>
-<!-- Bootstrap -->
-<script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- daterangepicker -->
-<script src="resources/js/plugins/daterangepicker/daterangepicker.js"
-	type="text/javascript"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="resources/js/plugins/chart.js" type="text/javascript"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 
-<!-- datepicker
-        <script src="resources/js/plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>-->
-<!-- Bootstrap WYSIHTML5
-        <script src="resources/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>-->
-<!-- iCheck -->
-<script src="resources/js/plugins/iCheck/icheck.min.js"
-	type="text/javascript"></script>
-<!-- calendar -->
-<script src="resources/js/plugins/fullcalendar/fullcalendar.js"
-	type="text/javascript"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="dist/js/sb-admin-2.js"></script>
+	
+	<!-- AngularJs modules -->
+	<script src="bower_components/angularjs/angular.min.js"></script>
+	<script src="bower_components/angularjs/angular-resource.min.js"></script>
+	<script src="bower_components/angularjs/angular-route.min.js"></script>
+	<script src="bower_components/angularjs/angular-cookies.min.js"></script>
 
-<!-- Director App -->
-<script src="resources/js/Director/app.js" type="text/javascript"></script>
+	<script src="bower_components/chartjs/Chart.js"></script>
 
-<!-- Director dashboard demo (This is only for demo purposes) -->
-<script src="resources/js/Director/dashboard.js" type="text/javascript"></script>
-
-<!-- Director for demo purposes -->
-<script type="text/javascript">
-	$('input').on('ifChecked', function(event) {
-		// var element = $(this).parent().find('input:checkbox:first');
-		// element.parent().parent().parent().addClass('highlight');
-		$(this).parents('li').addClass("task-done");
-		console.log('ok');
-	});
-	$('input').on('ifUnchecked', function(event) {
-		// var element = $(this).parent().find('input:checkbox:first');
-		// element.parent().parent().parent().removeClass('highlight');
-		$(this).parents('li').removeClass("task-done");
-		console.log('not');
-	});
-</script>
-<script>
-	$('#noti-box').slimScroll({
-		height : '400px',
-		size : '5px',
-		BorderRadius : '5px'
-	});
-
-	$('input[type="checkbox"].flat-grey, input[type="radio"].flat-grey')
-			.iCheck({
-				checkboxClass : 'icheckbox_flat-grey',
-				radioClass : 'iradio_flat-grey'
-			});
-</script>
+	<script src="dist/js/tables-widget.js"></script>
+	<script src="dist/js/charts-widget.js"></script>
+	
+	<script src="dist/js/services.js"></script>
+	<script src="dist/js/app.js"></script>
+	<script src="dist/js/controllers.js"></script>
 </head>
-<body class="skin-black" data-ng-app="myApp">
-	<!-- header logo: style can be found in header.less -->
-	<header class="header">
-		<a href="index.html" class="logo"> Hedi Apps </a>
-		<!-- Header Navbar: style can be found in header.less -->
-		<nav class="navbar navbar-static-top" role="navigation">
-			<!-- Sidebar toggle button-->
-			<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas"
-				role="button"> <span class="sr-only">Toggle navigation</span> <span
-				class="icon-bar"></span> <span class="icon-bar"></span> <span
-				class="icon-bar"></span>
-			</a>
-			<div
-				data-ng-class="{'navbar-right' : $root.user, 'hide' : !$root.user}" data-ng-controller="userCtrl">
-				<ul class="nav navbar-nav">
-					<!-- Messages: style can be found in dropdown.less-->
-					<li class="dropdown messages-menu"><a href data-ng-click="getMessages()"
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="fa fa-envelope"></i> <span class="label label-success">{{$root.user.newMessages}}</span>
-					</a>
-						<ul class="dropdown-menu">
-							<li class="header">You have {{$root.user.newMessages}} messages</li>
-							<li>
-								<!-- inner menu: contains the actual data -->
-								<ul id="messagesMenu" class="menu">
-								</ul>
-							</li>
-							<li class="footer"><a href>See All Messages</a></li>
-						</ul></li>
-					<li class="dropdown tasks-menu"><a href
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="fa fa-tasks"></i> <span class="label label-danger">{{$root.user.currentTasks}}</span>
-					</a>
-						<ul class="dropdown-menu">
-							<li class="header">You have {{$root.user.currentTasks}} tasks</li>
-							<li>
-								<!-- inner menu: contains the actual data -->
-								<ul class="menu">
-									<li>
-										<!-- Task item --> <a href>
-											<h3>
-												Design some buttons <small class="pull-right">20%</small>
-											</h3>
-											<div class="progress progress-striped xs">
-												<div class="progress-bar progress-bar-success"
-													style="width: 20%" role="progressbar" aria-valuenow="20"
-													aria-valuemin="0" aria-valuemax="100">
-													<span class="sr-only">20% Complete</span>
-												</div>
-											</div>
-									</a>
-									</li>
-									<!-- end task item -->
-									<li>
-										<!-- Task item --> <a href>
-											<h3>
-												Create a nice theme <small class="pull-right">40%</small>
-											</h3>
-											<div class="progress progress-striped xs">
-												<div class="progress-bar progress-bar-danger"
-													style="width: 40%" role="progressbar" aria-valuenow="20"
-													aria-valuemin="0" aria-valuemax="100">
-													<span class="sr-only">40% Complete</span>
-												</div>
-											</div>
-									</a>
-									</li>
-									<!-- end task item -->
-									<li>
-										<!-- Task item --> <a href>
-											<h3>
-												Some task I need to do <small class="pull-right">60%</small>
-											</h3>
-											<div class="progress progress-striped xs">
-												<div class="progress-bar progress-bar-info"
-													style="width: 60%" role="progressbar" aria-valuenow="20"
-													aria-valuemin="0" aria-valuemax="100">
-													<span class="sr-only">60% Complete</span>
-												</div>
-											</div>
-									</a>
-									</li>
-									<!-- end task item -->
-									<li>
-										<!-- Task item --> <a href>
-											<h3>
-												Make beautiful transitions <small class="pull-right">80%</small>
-											</h3>
-											<div class="progress progress-striped xs">
-												<div class="progress-bar progress-bar-warning"
-													style="width: 80%" role="progressbar" aria-valuenow="20"
-													aria-valuemin="0" aria-valuemax="100">
-													<span class="sr-only">80% Complete</span>
-												</div>
-											</div>
-									</a>
-									</li>
-									<!-- end task item -->
-								</ul>
-							</li>
-							<li class="footer"><a href>View all tasks</a></li>
-						</ul></li>
-					<!-- User Account: style can be found in dropdown.less -->
-					<li class="dropdown user user-menu"><a href
-						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="fa fa-user"></i> <span>{{$root.user.firstName}} {{$root.user.lastName}} <i class="caret"></i></span>
-					</a>
-						<ul class="dropdown-menu dropdown-custom dropdown-menu-right">
-							<li class="dropdown-header text-center">Account</li>
 
-							<li><a href="#"> <i
-									class="fa fa-clock-o fa-fw pull-right"></i> <span
-									class="badge badge-success pull-right">10</span> Updates
-							</a> <a href="#"> <i class="fa fa-envelope-o fa-fw pull-right"></i>
-									<span class="badge badge-danger pull-right">5</span> Messages
-							</a> <a href="#"><i class="fa fa-magnet fa-fw pull-right"></i> <span
-									class="badge badge-info pull-right">3</span> Subscriptions</a> <a
-								href="#"><i class="fa fa-question fa-fw pull-right"></i> <span
-									class="badge pull-right">11</span> FAQ</a></li>
+<body data-ng-app="myApp">
 
-							<li class="divider"></li>
+    <div id="wrapper">
 
-							<li><a href="#"> <i class="fa fa-user fa-fw pull-right"></i>
-									Profile
-							</a> <a data-toggle="modal" href="#modal-user-settings"> <i
-									class="fa fa-cog fa-fw pull-right"></i> Settings
-							</a></li>
+        <!-- Navigation -->
+        <nav data-ng-class="{'navbar navbar-default navbar-static-top' : $root.user, 'hide' : !$root.user}" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+            </div>
+            <!-- /.navbar-header -->
 
-							<li class="divider"></li>
+            <ul class="nav navbar-top-links navbar-right" data-ng-controller="userCtrl">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" data-ng-click="getMessages()">
+                        <i class="fa fa-envelope fa-fw"></i> <span class="label label-success">{{$root.user.newMessages}}</span> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li data-ng-repeat="message in messages">
+                            <a href="#">
+                                <div>
+                                    <strong>{{message.fromUser.firstName}}</strong>
+                                    <span class="pull-right text-muted">
+                                        <em>{{message.delai}}</em>
+                                    </span>
+                                </div>
+                                <div>{{message.subject}}</div>
+                            </a>
+                            <div class="divider"></div>
+                        </li>
+                        
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>Read All Messages</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-messages -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-tasks fa-fw"></i> <span class="label label-success">{{$root.user.currentTasks}}</span> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-tasks">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="pull-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="pull-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="pull-right text-muted">60% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <span class="sr-only">60% Complete (warning)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <p>
+                                        <strong>Task 4</strong>
+                                        <span class="pull-right text-muted">80% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped active">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Tasks</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-tasks -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a class="text-center" href="#">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-alerts -->
+                </li>
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li data-ng-controller="loginCtrl"><a href data-ng-click="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
 
-							<li data-ng-controller="loginCtrl"><a href
-								data-ng-click="logout()"><i
-									class="fa fa-ban fa-fw pull-right"></i> Logout</a></li>
-						</ul></li>
-				</ul>
-			</div>
-		</nav>
-	</header>
-	<div class="wrapper row-offcanvas row-offcanvas-left">
-		<!-- Left side column. contains the logo and sidebar -->
-		<aside class="left-side sidebar-offcanvas">
-			<!-- sidebar: style can be found in sidebar.less -->
-			<section
-				data-ng-class="{'sidebar' : $root.user, 'hide' : !$root.user}">
-				<!-- Sidebar user panel -->
-				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="resources/img/26115.jpg" class="img-circle"
-							alt="User Image" />
-					</div>
-					<div class="pull-left info">
-						<p>Hello, {{$root.user.firstName}}</p>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul id="side-menu" class="nav">
+                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="flot.html">Flot Charts</a>
+                                </li>
+                                <li>
+                                    <a href="morris.html">Morris.js Charts</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="panels-wells.html">Panels and Wells</a>
+                                </li>
+                                <li>
+                                    <a href="buttons.html">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="notifications.html">Notifications</a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                                <li>
+                                    <a href="icons.html"> Icons</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grid</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Second Level Item</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Third Level Item</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="blank.html">Blank Page</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">Login Page</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
 
-						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-					</div>
-				</div>
-				<!-- search form -->
-				<form action="#" method="get" class="sidebar-form">
-					<div class="input-group">
-						<input type="text" name="q" class="form-control"
-							placeholder="Search..." /> <span class="input-group-btn">
-							<button type='submit' name='seach' id='search-btn'
-								class="btn btn-flat">
-								<i class="fa fa-search"></i>
-							</button>
-						</span>
-					</div>
-				</form>
-				<!-- /.search form -->
-				<!-- sidebar menu: : style can be found in sidebar.less -->
-				<ul class="sidebar-menu">
-					<li class="active"><a href="dashboard"> <i
-							class="fa fa-dashboard"></i> <span>Dashboard</span>
-					</a></li>
-					<li><a href="general"> <i class="fa fa-gavel"></i> <span>General</span>
-					</a></li>
+        <div id="page-wrapper">
+			<div data-ng-view></div>
+        </div>
+        <!-- /#page-wrapper -->
 
-					<li><a href="basic_form"> <i class="fa fa-globe"></i> <span>Basic
-								Elements</span>
-					</a></li>
-
-					<li><a href="simple"> <i class="fa fa-glass"></i> <span>Simple
-								tables</span>
-					</a></li>
-
-				</ul>
-			</section>
-			<!-- /.sidebar -->
-		</aside>
-
-		<aside class="right-side">
-
-			<!-- Main content -->
-			<section class="content">
-				<div data-ng-view></div>
-			</section>
-			<!-- /.content -->
-			<div class="footer-main">Copyright &copy Hedi, 2016</div>
-		</aside>
-		<!-- /.right-side -->
-
-	</div>
-	<!-- ./wrapper -->
-
-
+    </div>
+    <!-- /#wrapper -->
 </body>
+
 </html>

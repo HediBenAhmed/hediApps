@@ -67,16 +67,16 @@ public class DataResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Data createData(Data data) {
 		logger.info("Start createData.");
-		
+
 		dataService.create(data);
 		return data;
 	}
 
-	@Path("/")
+	@Path("/{id}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Data updateData(Data data) {
+	public Data updateData(@PathParam("id") long dataId, Data data) {
 		logger.info("Start updateNode.");
 		dataService.update(data);
 		return data;
