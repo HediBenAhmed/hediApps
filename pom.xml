@@ -5,7 +5,7 @@
 	<groupId>com.hedi.apps</groupId>
 	<artifactId>hediapps</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
 	<name>hediapps</name>
 	<url>http://maven.apache.org</url>
@@ -26,7 +26,7 @@
 	</licenses>
 
 	<properties>
-		<java-version>1.6</java-version>
+		<java-version>1.7</java-version>
 		<org.springframework-version>4.0.3.RELEASE</org.springframework-version>
 		<org.springframework.security-version>4.0.4.RELEASE</org.springframework.security-version>
 		<version.com.sun.jersey.contribs>1.19.1</version.com.sun.jersey.contribs>
@@ -67,11 +67,6 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-mongodb</artifactId>
-			<version>${spring-data-mongodb.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework.security-version}</version>
@@ -81,7 +76,12 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${spring-data-mongodb.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-spring</artifactId>
@@ -185,28 +185,6 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.6.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.3.1</version>
-		</dependency>
 
 
 		<!-- Test -->
@@ -217,4 +195,11 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<modules>
+		<module>hediapps-backend</module>
+		<module>hediapps-services</module>
+
+
+		<module>hediapps-webapp</module>
+	</modules>
 </project>
