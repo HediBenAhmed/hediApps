@@ -48,7 +48,6 @@ app.controller('dataCtrl', [ '$scope', 'dataService',
 
 			self.findAllDatas = function() {
 				dataService.query(function(datas) {
-
 					self.datas = datas;
 				}, function(errResponse) {
 					console.error('Error');
