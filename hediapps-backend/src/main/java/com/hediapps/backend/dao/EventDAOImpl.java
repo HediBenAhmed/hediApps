@@ -10,16 +10,16 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hediapps.backend.model.Notification;
+import com.hediapps.backend.model.Event;
 import com.hediapps.backend.model.SystemEvent;
 
 @Repository
-public class NotificationDAOImpl implements DAO<Notification> {
+public class EventDAOImpl implements DAO<Event> {
 	@Autowired
 	MongoTemplate mongoTemplate;
 
 	@Transactional
-	public Notification create(Notification data) {
+	public Event create(Event data) {
 		data.setId(getNextSequence());
 		mongoTemplate.insert(data);
 
@@ -27,21 +27,21 @@ public class NotificationDAOImpl implements DAO<Notification> {
 	}
 
 	@Transactional(readOnly = true)
-	public Notification findById(long id) {
+	public Event findById(long id) {
 
 		// Query query = new Query();
 		// query.addCriteria(Criteria.where("name").is(data.getName())
 		// .and("value").is(data.getValue()));
 		//
 		// List<Data> datas = mongoTemplate.find(query, Data.class);
-		Notification data = mongoTemplate.findById(id, Notification.class);
+		Event data = mongoTemplate.findById(id, Event.class);
 
 		return data;
 	}
 
 	@Transactional
-	public Notification update(Notification object) {
-		Notification data = findById(object.getId());
+	public Event update(Event object) {
+		Event data = findById(object.getId());
 
 		if (data == null) {
 			return null;
@@ -53,8 +53,8 @@ public class NotificationDAOImpl implements DAO<Notification> {
 	}
 
 	@Transactional
-	public Notification delete(long id) {
-		Notification data = findById(id);
+	public Event delete(long id) {
+		Event data = findById(id);
 		if (data != null)
 			mongoTemplate.remove(data);
 		return data;
@@ -66,7 +66,7 @@ public class NotificationDAOImpl implements DAO<Notification> {
 		query.limit(1);
 		query.with(new Sort(Sort.Direction.DESC, "_id"));
 
-		Notification lastData = mongoTemplate.findOne(query, Notification.class);
+		Event lastData = mongoTemplate.findOne(query, Event.class);
 
 		if (lastData == null)
 			return 1l;
@@ -75,19 +75,20 @@ public class NotificationDAOImpl implements DAO<Notification> {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Notification> findAll() {
+	public List<Event> findAll() {
 
-		List<Notification> notifications = findAllSystemEvents();
+		List<Event> notifications = findAllSystemEvents();
 
 		return notifications;
 	}
 
 	@Transactional(readOnly = true)
-	public List<Notification> findAllSystemEvents() {
+	public List<Event> findAllSystemEvents() {
 
 		Query query = new Query();
-		query.addCriteria(Criteria.where("_class").is(SystemEvent.class.getName()));
+		query.addCriteria(Criteria.where("_class").is(
+				SystemEvent.class.getName()));
 
-		return mongoTemplate.find(query, Notification.class);
+		return mongoTemplate.find(query, Event.class);
 	}
 }

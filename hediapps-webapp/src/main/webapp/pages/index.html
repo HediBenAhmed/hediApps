@@ -98,10 +98,10 @@
 </div>
 <!-- /.row -->
 <div class="row">
-	<div class="col-lg-8" data-ng-controller="dataCtrl">
-		<chartwdg name="'line chart'" datas="findAllDatas()" type="'line'" />
+	<div class="col-lg-8" data-ng-controller="dataCtrl as datasCtrl">
+		<chartwdg name="'line chart'" datas="datasCtrl.datas" type="'polarArea'" />
 		
-		<tablewdg name="'Table'" datas="{}" type="''" />
+		<tablewdg name="'Table'" datas="datasCtrl.datas" type="''" />
 		
 		<div class="panel panel-default">
 			<div class="panel-heading">

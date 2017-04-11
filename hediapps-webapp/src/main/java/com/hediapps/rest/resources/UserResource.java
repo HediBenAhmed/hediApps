@@ -108,12 +108,7 @@ public class UserResource {
 			messagesTransfer = new ArrayList<MessageTransfer>();
 			for (Message message : messages) {
 
-				User from = userService.readById(message.getFromUser());
-
-				MessageTransfer messageTransfer = new MessageTransfer(
-						new UserTransfer(from.getId(), from.getFirstName(), from.getLastName(), from.getEmail(), null,
-								0, 0),
-						null, message.getCreationDate(), message.getSubject(), message.getText(), message.isRead());
+				MessageTransfer messageTransfer = new MessageTransfer(message);
 
 				messagesTransfer.add(messageTransfer);
 			}

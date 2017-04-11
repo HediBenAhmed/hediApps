@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "common")
-public class Notification {
+public class Event {
 	@Id
 	private long id;
 

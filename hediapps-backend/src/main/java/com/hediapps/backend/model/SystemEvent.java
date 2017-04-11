@@ -3,7 +3,7 @@ package com.hediapps.backend.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "common")
-public class SystemEvent extends Notification {
+public class SystemEvent extends Event {
 
 	private String event;
 	private EventSeverity severity;

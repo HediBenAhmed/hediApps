@@ -18,13 +18,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.hediapps.backend.model.Email;
 import com.hediapps.backend.model.Message;
 import com.hediapps.service.MessageService;
 
 @Component
 @Path("/messages")
 public class MessageResource {
-	private static final Logger logger = LoggerFactory.getLogger(MessageResource.class);
+	private static final Logger logger = LoggerFactory
+			.getLogger(MessageResource.class);
 
 	@Autowired
 	private MessageService messageService;
@@ -32,18 +34,18 @@ public class MessageResource {
 	@Path("dummy")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Message getDummyMessage() {
+	public Message getDummyEmail() {
 		logger.info("Start getDummyMessage");
-		Message data = new Message();
+		Email data = new Email();
 		data.setId(0);
 		data.setCreationDate(new Date());
 		data.setFromUser(1l);
 		data.setSubject("dummy");
 		data.setText("text");
 		data.setToUser(2l);
-		
+
 		messageService.create(data);
-		
+
 		return data;
 	}
 

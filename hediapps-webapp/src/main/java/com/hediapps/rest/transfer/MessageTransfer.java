@@ -1,5 +1,7 @@
 package com.hediapps.rest.transfer;
 
+import com.hediapps.backend.model.Message;
+
 public class MessageTransfer {
 
 	private UserTransfer fromUser;
@@ -13,16 +15,11 @@ public class MessageTransfer {
 
 	}
 
-	public MessageTransfer(UserTransfer fromUser, UserTransfer toUser, long creationDate, String subject, String text,
-			boolean read) {
-		super();
-		this.fromUser = fromUser;
-		this.toUser = toUser;
-		this.creationDate = creationDate;
-		
-		this.subject = subject;
-		this.text = text;
-		this.read = read;
+	public MessageTransfer(Message message) {
+
+		this.creationDate = message.getCreationDate();
+		this.text = message.getText();
+		this.read = message.isRead();
 	}
 
 	public UserTransfer getFromUser() {

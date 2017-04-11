@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.hediapps.backend.model.Email;
 import com.hediapps.backend.model.Message;
 
 @Repository
@@ -70,17 +71,22 @@ public class MessageDAOImpl implements DAO<Message> {
 
 	public List<Message> findAll() {
 
+		return findAllEmails();
+	}
+
+	public List<Message> findAllEmails() {
+
 		Query query = new Query();
-		query.addCriteria(Criteria.where("_class").is(Message.class.getName()));
+		query.addCriteria(Criteria.where("_class").is(Email.class.getName()));
 
 		return mongoTemplate.find(query, Message.class);
 	}
 
-	public List<Message> findByToUserId(long toUser) {
+	public List<Email> findByToUserId(long toUser) {
 
 		Query query = new Query();
 		query.addCriteria(Criteria.where("toUser").is(toUser));
 
-		return mongoTemplate.find(query, Message.class);
+		return mongoTemplate.find(query, Email.class);
 	}
 }

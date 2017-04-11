@@ -27,13 +27,13 @@
 
 	<properties>
 		<java-version>1.7</java-version>
-		<org.springframework-version>4.0.3.RELEASE</org.springframework-version>
-		<org.springframework.security-version>4.0.4.RELEASE</org.springframework.security-version>
-		<version.com.sun.jersey.contribs>1.19.1</version.com.sun.jersey.contribs>
+		<org.springframework-version>4.2.8.RELEASE</org.springframework-version>
+		<org.springframework.security-version>4.1.3.RELEASE</org.springframework.security-version>
+		<version.com.sun.jersey.contribs>1.18.3</version.com.sun.jersey.contribs>
 		<org.aspectj-version>1.7.4</org.aspectj-version>
 		<org.slf4j-version>1.7.5</org.slf4j-version>
 		<jackson.databind-version>2.2.3</jackson.databind-version>
-		<spring-data-mongodb.version>1.5.2.RELEASE</spring-data-mongodb.version>
+		<spring-data-mongodb.version>1.8.4.RELEASE</spring-data-mongodb.version>
 	</properties>
 	<dependencies>
 		<!-- Jackson -->
@@ -41,6 +41,12 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.databind-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.13.3</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -198,8 +204,6 @@
 	<modules>
 		<module>hediapps-backend</module>
 		<module>hediapps-services</module>
-
-
 		<module>hediapps-webapp</module>
 	</modules>
 </project>

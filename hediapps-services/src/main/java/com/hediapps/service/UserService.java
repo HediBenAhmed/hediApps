@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.hediapps.backend.dao.MessageDAOImpl;
 import com.hediapps.backend.dao.UserDAOImpl;
+import com.hediapps.backend.model.Email;
 import com.hediapps.backend.model.Message;
 import com.hediapps.backend.model.User;
 
@@ -60,17 +61,17 @@ public class UserService implements UserDetailsService {
 		return user;
 	}
 
-	public List<Message> getMessages(Long userId) {
-		List<Message> messages = messageDAO.findByToUserId(userId);
+	public List<Email> getEmails(Long userId) {
+		List<Email> messages = messageDAO.findByToUserId(userId);
 		return messages;
 	}
 
-	public List<Message> getMessages(Long userId, boolean isRead) {
-		List<Message> messages = getMessages(userId);
+	public List<Email> getEmails(Long userId, boolean isRead) {
+		List<Email> messages = getEmails(userId);
 
 		if (messages != null && !messages.isEmpty()) {
-			List<Message> filtredMessages = new ArrayList<Message>();
-			for (Message msg : messages) {
+			List<Email> filtredMessages = new ArrayList<Email>();
+			for (Email msg : messages) {
 				if (msg.isRead() == isRead) {
 					filtredMessages.add(msg);
 				}
@@ -79,5 +80,10 @@ public class UserService implements UserDetailsService {
 			return filtredMessages;
 		}
 		return messages;
+	}
+
+	public List<Message> getMessages(long userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

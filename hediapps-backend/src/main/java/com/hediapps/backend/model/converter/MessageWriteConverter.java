@@ -3,6 +3,7 @@ package com.hediapps.backend.model.converter;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import com.hediapps.backend.model.Email;
 import com.hediapps.backend.model.Message;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -11,17 +12,19 @@ import com.mongodb.DBObject;
 public class MessageWriteConverter implements Converter<Message, DBObject> {
 
 	public DBObject convert(Message source) {
-
 		DBObject dbo = new BasicDBObject();
-		dbo.put("_id", source.getId());
-		dbo.put("_class", Message.class.getName());
+		
+		if (source instanceof Email) {
+			dbo.put("_id", source.getId());
+			dbo.put("_class", Message.class.getName());
 
-		dbo.put("fromUser", source.getFromUser());
-		dbo.put("toUser", source.getToUser());
-		// dbo.put("creationDate", source.getCreationDate() == null ? 0L :
-		// source.getCreationDate().getTime());
-		dbo.put("subject", source.getSubject());
-		dbo.put("text", source.getText());
+			dbo.put("fromUser", ((Email) source).getFromUser());
+			dbo.put("toUser", ((Email) source).getToUser());
+			// dbo.put("creationDate", source.getCreationDate() == null ? 0L :
+			// source.getCreationDate().getTime());
+			dbo.put("subject", ((Email) source).getSubject());
+			dbo.put("text", source.getText());
+		}
 
 		return dbo;
 	}

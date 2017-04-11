@@ -11,11 +11,7 @@ public class Message {
 	@Id
 	private long id;
 
-	private long fromUser;
-
-	private long toUser;
 	private long creationDate;
-	private String subject;
 	private String text;
 
 	private boolean read;
@@ -24,13 +20,10 @@ public class Message {
 		super();
 	}
 
-	public Message(long id, long fromUser, long toUser, Date creationDate, String subject, String text) {
+	public Message(long id, Date creationDate, String text) {
 		super();
 		this.id = id;
-		this.fromUser = fromUser;
-		this.toUser = toUser;
 		this.creationDate = creationDate == null ? 0l : creationDate.getTime();
-		this.subject = subject;
 		this.text = text;
 	}
 
@@ -40,22 +33,6 @@ public class Message {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public long getFromUser() {
-		return fromUser;
-	}
-
-	public void setFromUser(long fromUser) {
-		this.fromUser = fromUser;
-	}
-
-	public long getToUser() {
-		return toUser;
-	}
-
-	public void setToUser(long toUser) {
-		this.toUser = toUser;
 	}
 
 	public long getCreationDate() {
@@ -68,14 +45,6 @@ public class Message {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate == null ? 0l : creationDate.getTime();
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
 	}
 
 	public String getText() {
@@ -96,8 +65,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [id=" + id + ", fromUser=" + fromUser + ", toUser=" + toUser + ", creationDate=" + creationDate
-				+ ", subject=" + subject + ", text=" + text + "]";
+		return "Message [id=" + id + ", creationDate=" + creationDate
+				+ ", text=" + text + ", read=" + read + "]";
 	}
-
 }

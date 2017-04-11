@@ -19,6 +19,6 @@
 	<beans:bean id="userService" class="com.hediapps.service.UserService">
 	</beans:bean>
 
-	<beans:bean id="notificationService" class="com.hediapps.service.NotificationService">
+	<beans:bean id="eventService" class="com.hediapps.service.EventService">
 	</beans:bean>
 </beans:beans>

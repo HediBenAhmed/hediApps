@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.hediapps.backend.model.Email;
 import com.hediapps.backend.model.Message;
 import com.hediapps.backend.model.User;
 import com.hediapps.rest.transfer.TokenTransfer;
@@ -81,7 +82,7 @@ public class LoginService {
 
 		User userDetails = (User) principal;
 
-		List<Message> messages = userService.getMessages(userDetails.getId(), false);
+		List<Email> messages = userService.getEmails(userDetails.getId(), false);
 
 		return new UserTransfer(userDetails.getId(), userDetails.getFirstName(), userDetails.getLastName(),
 				userDetails.getEmail(), this.createRoleMap(userDetails), messages.size(), 0);
