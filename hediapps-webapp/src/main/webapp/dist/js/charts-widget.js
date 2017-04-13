@@ -5,19 +5,18 @@ angular.module('chartwdg', []).directive('chartwdg', function() {
 			nameChart : '=name',
 			typeChart : '=type',
 			datasChart : '=datas'
-
 		},
 		templateUrl : 'partials/charts-widget.html',
 		link : function link(scope, element, attrs) {
 
 			var chartColors = [
-			/* red */'rgba(255, 99, 132, 0.6)',
-			/* orange */'rgba(255, 159, 64, 0.6)',
-			/* yellow */'rgba(255, 205, 86, 0.6)',
-			/* green */'rgba(75, 192, 192, 0.6)',
-			/* blue */'rgba(54, 162, 235, 0.6)',
-			/* purple */'rgba(153, 102, 255, 0.6)',
-			/* grey */'rgba(231,233,237, 0.6)' ];
+			/* red */'rgba(255, 99, 132, 0.8)',
+			/* orange */'rgba(255, 159, 64, 0.8)',
+			/* yellow */'rgba(255, 205, 86, 0.8)',
+			/* green */'rgba(75, 192, 192, 0.8)',
+			/* blue */'rgba(54, 162, 235, 0.8)',
+			/* purple */'rgba(153, 102, 255, 0.8)',
+			/* grey */'rgba(231,233,237, 0.8)' ];
 
 			scope.$watch('datasChart', function(newDatasChart) {
 
