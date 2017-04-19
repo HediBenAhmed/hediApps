@@ -31,14 +31,16 @@
 	<!-- INIT REST COMPONENTS -->
 	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
 
-	<!-- init websocket handlers -->
+	<!-- init websocket handlers
 	<websocket:message-broker
-		application-destination-prefix="/app" path-matcher="pathMatcher">
-		<websocket:stomp-endpoint path="/stomp" />
-		<websocket:simple-broker prefix="/topic, /queue" />
+		application-destination-prefix="/app">
+		<websocket:stomp-endpoint path="/ws">
+			<websocket:sockjs />
+		</websocket:stomp-endpoint>
+		<websocket:simple-broker prefix="/topic" />
 	</websocket:message-broker>
 
 	<bean id="pathMatcher" class="org.springframework.util.AntPathMatcher">
-		<constructor-arg index="0" value="." />
-	</bean>
+		<constructor-arg index="0" value="." /> 
+	</bean>-->
 </beans:beans>

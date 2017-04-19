@@ -38,7 +38,7 @@ services.factory('loginService', function($resource) {
 });
 
 services.factory('userService', function($resource) {
-
+	
 	return $resource('rest/users/:id/:action', {}, {
 		getMessages : {
 			method : 'GET',
@@ -52,16 +52,15 @@ services.factory('userService', function($resource) {
 });
 
 services.factory("ChatService", function($q, $timeout) {
-    
     var service = {}, listener = $q.defer(), socket = {
       client: null,
       stomp: null
     }, messageIds = [];
     
     service.RECONNECT_TIMEOUT = 30000;
-    service.SOCKET_URL = "/stomp";
-    service.CHAT_TOPIC = "/topic/greetings";
-    service.CHAT_BROKER = "/app/hello";
+    service.SOCKET_URL = "/hediapps/chat";
+    service.CHAT_TOPIC = "/topic/message";
+    service.CHAT_BROKER = "/app/chat";
     
     service.receive = function() {
       return listener.promise;
@@ -109,5 +108,6 @@ services.factory("ChatService", function($q, $timeout) {
     };
     
     initialize();
+    service.send("hello");
     return service;
   });

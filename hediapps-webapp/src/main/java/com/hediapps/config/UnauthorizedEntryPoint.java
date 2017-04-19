@@ -1,4 +1,4 @@
-package com.hediapps.rest;
+package com.hediapps.config;
 
 import java.io.IOException;
 
