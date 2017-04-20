@@ -4,35 +4,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hediapps.backend.model.Data;
 import com.hediapps.service.DataService;
 
 @Component
-@Path("/datas")
+@RequestMapping("/rest/datas")
 public class DataResource {
 	private static final Logger logger = LoggerFactory.getLogger(DataResource.class);
 
 	@Autowired
 	private DataService dataService;
 
-	@Path("dummy")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(value = "dummy", method = RequestMethod.GET)
+	@ResponseBody
 	public Data getDummyData() {
 		logger.info("Start getDummyData");
 		Data data = new Data();
@@ -44,27 +37,23 @@ public class DataResource {
 		return data;
 	}
 
-	@Path("/{id}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Data getData(@PathParam("id") long dataId) {
-		logger.info("Start getData. ID=" + dataId);
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Data getData(@PathVariable long id) {
+		logger.info("Start getData. ID=" + id);
 
-		return dataService.readById(dataId);
+		return dataService.readById(id);
 	}
 
-	@Path("/")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
 	public List<Data> getAllDatas() {
 		logger.info("Start getAllDatas.");
 		return dataService.readAll();
 	}
 
-	@Path("/")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
 	public Data createData(Data data) {
 		logger.info("Start createData.");
 
@@ -72,24 +61,21 @@ public class DataResource {
 		return data;
 	}
 
-	@Path("/{id}")
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Data updateData(@PathParam("id") long dataId, Data data) {
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
+	public Data updateData(Data data) {
 		logger.info("Start updateNode.");
 		dataService.update(data);
 		return data;
 	}
 
-	@Path("/{id}")
-	@DELETE
-	@Produces(MediaType.APPLICATION_JSON)
-	public Data deleteData(@PathParam("id") long dataId) {
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Data deleteData(@PathVariable long id) {
 
 		logger.info("Start deleteData.");
-		Data data = dataService.readById(dataId);
-		dataService.deleteById(dataId);
+		Data data = dataService.readById(id);
+		dataService.deleteById(id);
 		return data;
 	}
 

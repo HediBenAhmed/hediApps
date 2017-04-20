@@ -4,14 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,9 +13,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hediapps.backend.model.Email;
-import com.hediapps.backend.model.Message;
 import com.hediapps.backend.model.User;
 import com.hediapps.rest.transfer.TokenTransfer;
 import com.hediapps.rest.transfer.UserTransfer;
@@ -31,7 +26,7 @@ import com.hediapps.rest.utils.TokenUtils;
 import com.hediapps.service.UserService;
 
 @Component
-@Path("/loginService")
+@RequestMapping("/rest/loginService")
 public class LoginService {
 	@Autowired
 	private UserService userService;
@@ -49,10 +44,10 @@ public class LoginService {
 	 *            The password of the user.
 	 * @return A transfer containing the authentication token.
 	 */
-	@Path("authenticate")
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	public TokenTransfer authenticate(@FormParam("username") String username, @FormParam("password") String password) {
+	@RequestMapping(value = "authenticate", method = RequestMethod.POST)
+	@ResponseBody
+	public TokenTransfer authenticate(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
 
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
 				password);
@@ -65,19 +60,17 @@ public class LoginService {
 		 * after authorization and password is needed for token generation
 		 */
 		UserDetails userDetails = this.userService.loadUserByUsername(username);
-
 		return new TokenTransfer(TokenUtils.createToken(userDetails));
 	}
 
-	@Path("current")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public UserTransfer getUser() {
+	@RequestMapping(value = "current", method = RequestMethod.GET)
+	@ResponseBody
+	public UserTransfer getUser() throws Exception {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Object principal = authentication.getPrincipal();
 		if (principal instanceof String && ((String) principal).equals("anonymousUser")) {
-			throw new WebApplicationException(401);
+			throw new Exception("401");
 		}
 
 		User userDetails = (User) principal;

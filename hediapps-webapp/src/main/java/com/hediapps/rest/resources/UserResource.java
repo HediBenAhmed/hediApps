@@ -5,39 +5,31 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hediapps.backend.model.Message;
 import com.hediapps.backend.model.Role;
 import com.hediapps.backend.model.User;
 import com.hediapps.rest.transfer.MessageTransfer;
-import com.hediapps.rest.transfer.UserTransfer;
 import com.hediapps.service.UserService;
 
 @Component
-@Path("/users")
+@RequestMapping("/rest/users")
 public class UserResource {
 	private static final Logger logger = LoggerFactory.getLogger(UserResource.class);
 
 	@Autowired
 	private UserService userService;
 
-	@Path("dummy")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(value = "dummy", method = RequestMethod.GET)
+	@ResponseBody
 	public User getDummyUser() {
 
 		Set<Role> roles = new HashSet<Role>();
@@ -48,27 +40,23 @@ public class UserResource {
 		return data;
 	}
 
-	@Path("/{id}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public User getUser(@PathParam("id") long userId) {
-		logger.info("Start getUser. ID=" + userId);
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public User getUser(@PathVariable long id) {
+		logger.info("Start getUser. ID=" + id);
 
-		return userService.readById(userId);
+		return userService.readById(id);
 	}
 
-	@Path("/")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
 	public List<User> getAllUsers() {
 		logger.info("Start getAllUsers.");
 		return userService.readAll();
 	}
 
-	@Path("/")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
 	public User createUser(User data) {
 		logger.info("Start createUser.");
 
@@ -76,32 +64,28 @@ public class UserResource {
 		return data;
 	}
 
-	@Path("/")
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
 	public User updateUser(User data) {
 		logger.info("Start updateNode.");
 		userService.update(data);
 		return data;
 	}
 
-	@Path("/{id}")
-	@DELETE
-	@Produces(MediaType.APPLICATION_JSON)
-	public User deleteUser(@PathParam("id") long dataId) {
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public User deleteUser(@PathVariable long id) {
 		logger.info("Start deleteUser.");
-		User data = userService.readById(dataId);
-		userService.deleteById(dataId);
+		User data = userService.readById(id);
+		userService.deleteById(id);
 		return data;
 	}
 
-	@Path("/{id}/messages")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<MessageTransfer> getMessages(@PathParam("id") long userId) {
+	@RequestMapping(value = "{id}/messages", method = RequestMethod.GET)
+	@ResponseBody
+	public List<MessageTransfer> getMessages(@PathVariable long id) {
 
-		List<Message> messages = userService.getMessages(userId);
+		List<Message> messages = userService.getMessages(id);
 
 		List<MessageTransfer> messagesTransfer = null;
 		if (messages != null) {

@@ -3,37 +3,29 @@ package com.hediapps.rest.resources;
 import java.util.Date;
 import java.util.List;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hediapps.backend.model.Email;
 import com.hediapps.backend.model.Message;
 import com.hediapps.service.MessageService;
 
 @Component
-@Path("/messages")
+@RequestMapping("/rest/messages")
 public class MessageResource {
-	private static final Logger logger = LoggerFactory
-			.getLogger(MessageResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(MessageResource.class);
 
 	@Autowired
 	private MessageService messageService;
 
-	@Path("dummy")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(value = "dummy", method = RequestMethod.GET)
+	@ResponseBody
 	public Message getDummyEmail() {
 		logger.info("Start getDummyMessage");
 		Email data = new Email();
@@ -49,26 +41,22 @@ public class MessageResource {
 		return data;
 	}
 
-	@Path("/{id}")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Message getMessage(@PathParam("id") long dataId) {
-		logger.info("Start getMessage. ID=" + dataId);
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Message getMessage(@PathVariable long id) {
+		logger.info("Start getMessage. ID=" + id);
 
-		return messageService.readById(dataId);
+		return messageService.readById(id);
 	}
 
-	@Path("/")
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.GET)
+	@ResponseBody
 	public List<Message> getAllMessages() {
 		return messageService.readAll();
 	}
 
-	@Path("/")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
 	public Message createMessage(Message data) {
 		logger.info("Start createMessage.");
 
@@ -76,24 +64,21 @@ public class MessageResource {
 		return data;
 	}
 
-	@Path("/")
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(method = RequestMethod.PUT)
+	@ResponseBody
 	public Message updateMessage(Message data) {
 		logger.info("Start updateNode.");
 		messageService.update(data);
 		return data;
 	}
 
-	@Path("/{id}")
-	@DELETE
-	@Produces(MediaType.APPLICATION_JSON)
-	public Message deleteMessage(@PathParam("id") long dataId) {
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Message deleteMessage(@PathVariable long id) {
 
 		logger.info("Start deleteMessage.");
-		Message data = messageService.readById(dataId);
-		messageService.deleteById(dataId);
+		Message data = messageService.readById(id);
+		messageService.deleteById(id);
 		return data;
 	}
 

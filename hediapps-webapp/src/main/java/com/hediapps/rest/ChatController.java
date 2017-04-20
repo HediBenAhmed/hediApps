@@ -10,15 +10,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
 public class ChatController {
 
-  private Logger logger = LoggerFactory.getLogger(getClass());
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
-  @MessageMapping("/chat")
-  @SendTo("/topic/message")
-  public OutputMessage sendMessage(Message message) {
-    logger.info("Message sent");
-    return new OutputMessage(message, new Date());
-  }
+	@MessageMapping("/add")
+	@SendTo("/topic/showResult")
+	public Result addNum(CalcInput input) throws Exception {
+		System.out.println(input.getNum1());
+		Result result = new Result(input.getNum1() + "+" + input.getNum2() + "=" + (input.getNum1() + input.getNum2()));
+		return result;
+	}
+
+	@RequestMapping("/start")
+	public String start() {
+		return "start";
+	}
 }

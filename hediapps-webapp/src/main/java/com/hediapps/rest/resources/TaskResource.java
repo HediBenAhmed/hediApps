@@ -1,16 +1,15 @@
 package com.hediapps.rest.resources;
 
-import javax.ws.rs.Path;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hediapps.service.TaskService;
 
 @Component
-@Path("/tasks")
+@RequestMapping("/rest/tasks")
 public class TaskResource {
 	private static final Logger logger = LoggerFactory.getLogger(TaskResource.class);
 

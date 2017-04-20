@@ -58,9 +58,9 @@ services.factory("ChatService", function($q, $timeout) {
     }, messageIds = [];
     
     service.RECONNECT_TIMEOUT = 30000;
-    service.SOCKET_URL = "/hediapps/chat";
-    service.CHAT_TOPIC = "/topic/message";
-    service.CHAT_BROKER = "/app/chat";
+    service.SOCKET_URL = "/hediapps/add";
+    service.CHAT_TOPIC = "/topic/showResult";
+    service.CHAT_BROKER = "/calcApp/add";
     
     service.receive = function() {
       return listener.promise;
@@ -68,12 +68,7 @@ services.factory("ChatService", function($q, $timeout) {
     
     service.send = function(message) {
       var id = Math.floor(Math.random() * 1000000);
-      socket.stomp.send(service.CHAT_BROKER, {
-        priority: 9
-      }, JSON.stringify({
-        message: message,
-        id: id
-      }));
+      socket.stomp.send(service.CHAT_BROKER, {}, JSON.stringify({ 'num1': 1, 'num2': 2 }));
       messageIds.push(id);
     };
     
@@ -85,6 +80,8 @@ services.factory("ChatService", function($q, $timeout) {
     
     var getMessage = function(data) {
       var message = JSON.parse(data), out = {};
+      
+      alert(message)
       out.message = message.message;
       out.time = new Date(message.time);
       if (_.contains(messageIds, message.id)) {
