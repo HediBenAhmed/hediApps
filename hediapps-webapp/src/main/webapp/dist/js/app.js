@@ -1,7 +1,5 @@
-var hostApp = "http://localhost:8080/hediapps";
-
-var app = angular.module('myApp', [ 'ngRoute', 'ngCookies',
-		'myApp.services', 'chartwdg', 'tablewdg']);
+var app = angular.module('myApp', [ 'ngRoute', 'ngCookies', 'myApp.services',
+		'chartwdg', 'tablewdg', 'chatwdg' ]);
 
 app
 		.config(
@@ -86,38 +84,42 @@ app
 
 						} ]
 
-		).run(function($rootScope, $location, $cookies, loginService) {
+		)
+		.run(
+				function($rootScope, $location, $cookies, loginService) {
 
-			/* Reset error when a new view is loaded */
-			$rootScope.$on('$viewContentLoaded', function() {
-				delete $rootScope.error;
-			});
+					/* Reset error when a new view is loaded */
+					$rootScope.$on('$viewContentLoaded', function() {
+						delete $rootScope.error;
+					});
 
-			$rootScope.hasRole = function(role) {
+					$rootScope.hasRole = function(role) {
 
-				if ($rootScope.user === undefined) {
-					return false;
-				}
+						if ($rootScope.user === undefined) {
+							return false;
+						}
 
-				if ($rootScope.user.roles[role] === undefined) {
-					return false;
-				}
+						if ($rootScope.user.roles[role] === undefined) {
+							return false;
+						}
 
-				return $rootScope.user.roles[role];
-			};
+						return $rootScope.user.roles[role];
+					};
 
-			/* Try getting valid user from cookie or go to login page */
-			var originalPath = $location.path();
+					/* Try getting valid user from cookie or go to login page */
+					var originalPath = $location.path();
 
-			$location.path("/login");
-			var authToken = $cookies.get('authToken');
-			if (authToken !== undefined) {
-				$rootScope.authToken = authToken;
-				loginService.getCurrent(function(user) {
-					$rootScope.user = user;
-					$location.path(originalPath);
+					$location.path("/login");
+					var authToken = $cookies.get('authToken');
+					if (authToken !== undefined) {
+						$rootScope.authToken = authToken;
+						loginService
+								.getCurrent(function(user) {
+									$rootScope.user = user;
+
+									$location.path(originalPath);
+								});
+					}
+
+					$rootScope.initialized = true;
 				});
-			}
-
-			$rootScope.initialized = true;
-		});

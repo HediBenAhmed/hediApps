@@ -1,23 +1,25 @@
 package com.hediapps.rest.transfer;
 
-public class MessageTransfer {
-	
+import com.hediapps.backend.model.Message;
+
+public class EmailTransfer {
+
 	private UserTransfer fromUser;
-	private String destination;
+	private UserTransfer toUser;
 	private long creationDate;
+	private String subject;
 	private String text;
 	private boolean read;
 
-	public MessageTransfer() {
+	public EmailTransfer() {
+
 	}
 
-	public MessageTransfer(UserTransfer fromUser, String destination, long creationDate, String text, boolean read) {
-		super();
-		this.fromUser = fromUser;
-		this.destination = destination;
-		this.creationDate = creationDate;
-		this.text = text;
-		this.read = read;
+	public EmailTransfer(Message message) {
+
+		this.creationDate = message.getCreationDate();
+		this.text = message.getText();
+		this.read = message.isRead();
 	}
 
 	public UserTransfer getFromUser() {
@@ -28,12 +30,12 @@ public class MessageTransfer {
 		this.fromUser = fromUser;
 	}
 
-	public String getDestination() {
-		return destination;
+	public UserTransfer getToUser() {
+		return toUser;
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setToUser(UserTransfer toUser) {
+		this.toUser = toUser;
 	}
 
 	public long getCreationDate() {
@@ -42,6 +44,14 @@ public class MessageTransfer {
 
 	public void setCreationDate(long creationDate) {
 		this.creationDate = creationDate;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	public String getText() {
@@ -59,4 +69,5 @@ public class MessageTransfer {
 	public void setRead(boolean read) {
 		this.read = read;
 	}
+
 }

@@ -169,20 +169,3 @@ app.controller('userCtrl', [
 			};
 
 		} ]);
-
-app.controller("ChatCtrl", [ '$scope', 'ChatService',
-		function($scope, ChatService) {
-			$scope.messages = [];
-			$scope.message = "";
-			$scope.max = 140;
-
-			$scope.addMessage = function() {
-				ChatService.send($scope.message);
-				$scope.message = "";
-			};
-
-			ChatService.receive().then(null, null, function(message) {
-				alert(message);
-				$scope.messages.push(message);
-			});
-		} ]);
