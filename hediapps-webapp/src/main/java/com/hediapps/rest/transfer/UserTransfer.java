@@ -5,22 +5,21 @@ import java.util.Map;
 public class UserTransfer {
 
 	private long id;
-
 	private String firstName;
 	private String lastName;
-	
 	private String email;
-	
 	private int newMessages;
-
 	private int currentTasks;
+	private Map<String, Boolean> roles;
 
-	private final Map<String, Boolean> roles;
+	public UserTransfer() {
+	}
 
-	public UserTransfer(long id, String firstName,String lastName,String email, Map<String, Boolean> roles, int newMessages, int currentTasks) {
+	public UserTransfer(long id, String firstName, String lastName, String email, Map<String, Boolean> roles,
+			int newMessages, int currentTasks) {
 		this.id = id;
 		this.firstName = firstName;
-		this.lastName =lastName;
+		this.lastName = lastName;
 		this.email = email;
 		this.roles = roles;
 		this.newMessages = newMessages;

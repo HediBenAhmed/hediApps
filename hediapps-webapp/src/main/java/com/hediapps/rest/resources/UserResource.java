@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hediapps.backend.model.Message;
+import com.hediapps.backend.model.Email;
 import com.hediapps.backend.model.Role;
 import com.hediapps.backend.model.User;
-import com.hediapps.rest.transfer.MessageTransfer;
+import com.hediapps.rest.transfer.EmailTransfer;
 import com.hediapps.service.UserService;
 
 @Component
@@ -83,16 +83,16 @@ public class UserResource {
 
 	@RequestMapping(value = "{id}/messages", method = RequestMethod.GET)
 	@ResponseBody
-	public List<MessageTransfer> getMessages(@PathVariable long id) {
+	public List<EmailTransfer> getEmails(@PathVariable long id) {
 
-		List<Message> messages = userService.getMessages(id);
+		List<Email> messages = userService.getEmails(id, false);
 
-		List<MessageTransfer> messagesTransfer = null;
+		List<EmailTransfer> messagesTransfer = null;
 		if (messages != null) {
-			messagesTransfer = new ArrayList<MessageTransfer>();
-			for (Message message : messages) {
+			messagesTransfer = new ArrayList<EmailTransfer>();
+			for (Email message : messages) {
 
-				MessageTransfer messageTransfer = new MessageTransfer(message);
+				EmailTransfer messageTransfer = new EmailTransfer(message);
 
 				messagesTransfer.add(messageTransfer);
 			}

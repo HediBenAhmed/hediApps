@@ -1,7 +1,5 @@
-var hostApp = "http://localhost:8080/hediapps";
-
 var app = angular.module('myApp', [ 'ngRoute', 'ngCookies',
-		'myApp.services', 'chartwdg', 'tablewdg']);
+		'myApp.services', 'chartwdg', 'tablewdg' , 'chatwdg']);
 
 app
 		.config(

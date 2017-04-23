@@ -2,7 +2,7 @@ package com.hediapps.rest.transfer;
 
 import com.hediapps.backend.model.Message;
 
-public class MessageTransfer {
+public class EmailTransfer {
 
 	private UserTransfer fromUser;
 	private UserTransfer toUser;
@@ -11,11 +11,11 @@ public class MessageTransfer {
 	private String text;
 	private boolean read;
 
-	public MessageTransfer() {
+	public EmailTransfer() {
 
 	}
 
-	public MessageTransfer(Message message) {
+	public EmailTransfer(Message message) {
 
 		this.creationDate = message.getCreationDate();
 		this.text = message.getText();

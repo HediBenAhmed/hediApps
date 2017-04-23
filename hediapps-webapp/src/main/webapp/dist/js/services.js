@@ -38,7 +38,7 @@ services.factory('loginService', function($resource) {
 });
 
 services.factory('userService', function($resource) {
-	
+
 	return $resource('rest/users/:id/:action', {}, {
 		getMessages : {
 			method : 'GET',
@@ -51,60 +51,60 @@ services.factory('userService', function($resource) {
 	});
 });
 
-services.factory("ChatService", function($q, $timeout) {
-    var service = {}, listener = $q.defer(), socket = {
-      client: null,
-      stomp: null
-    }, messageIds = [];
-    
-    service.RECONNECT_TIMEOUT = 30000;
-    service.SOCKET_URL = "/hediapps/add";
-    service.CHAT_TOPIC = "/topic/showResult";
-    service.CHAT_BROKER = "/calcApp/add";
-    
-    service.receive = function() {
-      return listener.promise;
-    };
-    
-    service.send = function(message) {
-      var id = Math.floor(Math.random() * 1000000);
-      socket.stomp.send(service.CHAT_BROKER, {}, JSON.stringify({ 'num1': 1, 'num2': 2 }));
-      messageIds.push(id);
-    };
-    
-    var reconnect = function() {
-      $timeout(function() {
-        initialize();
-      }, this.RECONNECT_TIMEOUT);
-    };
-    
-    var getMessage = function(data) {
-      var message = JSON.parse(data), out = {};
-      
-      alert(message)
-      out.message = message.message;
-      out.time = new Date(message.time);
-      if (_.contains(messageIds, message.id)) {
-        out.self = true;
-        messageIds = _.remove(messageIds, message.id);
-      }
-      return out;
-    };
-    
-    var startListener = function() {
-      socket.stomp.subscribe(service.CHAT_TOPIC, function(data) {
-        listener.notify(getMessage(data.body));
-      });
-    };
-    
-    var initialize = function() {
-      socket.client = new SockJS(service.SOCKET_URL);
-      socket.stomp = Stomp.over(socket.client);
-      socket.stomp.connect({}, startListener);
-      socket.stomp.onclose = reconnect;
-    };
-    
-    initialize();
-    service.send("hello");
-    return service;
-  });
+services.factory("messageService", function($q, $timeout, $rootScope) {
+	var service = {};
+	var socket = {
+		client : null,
+		stomp : null
+	};
+
+	service.RECONNECT_TIMEOUT = 30000;
+	service.SOCKET_URL = "/hediapps/hediapps-websocket";
+
+	service.CHAT_BROKER = "/app/sendPublicMessage";
+	service.CHAT_TOPIC = "/topic/messages";
+
+	service.USER_BROKER = "/app/sendPrivateMessage";
+	service.USER_QUEUE = "/user/" + $rootScope.user.email + "/messages";
+
+	service.SERVER_TOPIC = "/topic/systemMessages";
+
+	service.send = function(uriBroker, message) {
+		message.fromUser = $rootScope.user;
+		socket.stomp.send(uriBroker, {}, JSON.stringify(message));
+	};
+
+	var reconnect = function() {
+		$timeout(function() {
+			initialize();
+		}, this.RECONNECT_TIMEOUT);
+	};
+
+	var initialize = function() {
+		socket.client = new SockJS(service.SOCKET_URL);
+		socket.stomp = Stomp.over(socket.client);
+
+		socket.stomp.connect({
+			"user" : $rootScope.user.email
+		}, function(frame) {
+
+			socket.stomp.subscribe(service.SERVER_TOPIC,
+					function(systemMessage) {
+						console.log(JSON.stringify(systemMessage));
+					});
+
+			socket.stomp.subscribe(service.CHAT_TOPIC, function(message) {
+				// console.log(JSON.parse(message.body));
+			});
+
+			socket.stomp.subscribe(service.USER_QUEUE, function(message) {
+				console.log(JSON.stringify(message));
+			});
+		});
+		socket.stomp.onclose = reconnect;
+	};
+
+	initialize();
+
+	return service;
+});
