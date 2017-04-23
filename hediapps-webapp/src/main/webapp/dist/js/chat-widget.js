@@ -17,16 +17,64 @@ angular
 									}, webSocketService.RECONNECT_TIMEOUT);
 								};
 
-								var responseHandler = function(message) {
-									$scope.oldMessages.push(JSON
-											.parse(message.body));
+								var responseHandler = function(response) {
+																		
+									$scope
+											.$apply(function() {
+												
+												var newMessage = JSON
+														.parse(response.body)
+												$scope.oldMessages
+														.push(newMessage);
+
+												var currentDate = Date.now();
+												// update time
+												for (var i = 0; i < $scope.oldMessages.length; i++) {
+													var delai = (currentDate - $scope.oldMessages[i].creationDate)
+															/ (1000 * 60);
+
+													if (delai >= 60) {
+														delai = delai / 60;
+
+														if (delai >= 24) {
+															delai = delai / 24;
+
+															if (delai >= 30) {
+																delai = delai / 30;
+
+																delai = Math
+																		.round(delai)
+																		+ " months";
+															} else {
+																delai = Math
+																		.round(delai)
+																		+ " days";
+															}
+														} else {
+															delai = Math
+																	.round(delai)
+																	+ " hours";
+														}
+													} else {
+														delai = Math
+																.round(delai)
+																+ " mins";
+													}
+
+													$scope.oldMessages[i].delai = delai;
+												}
+											});
 								}
 
 								var initialize = function() {
-									webSocketService.socket.client = new SockJS(
-											webSocketService.SOCKET_URL);
-									webSocketService.socket.stomp = Stomp
-											.over(webSocketService.socket.client);
+
+									if (webSocketService.socket.client == null
+											|| webSocketService.socket.stomp == null) {
+										webSocketService.socket.client = new SockJS(
+												webSocketService.SOCKET_URL);
+										webSocketService.socket.stomp = Stomp
+												.over(webSocketService.socket.client);
+									}
 
 									webSocketService.socket.stomp
 											.connect(

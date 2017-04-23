@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<!-- /.panel-heading -->
-	<div class="panel-body">
+	<div class="panel-body" id="chatBody" scroll-glue>
 		<ul class="chat">
 			<div data-ng-repeat="message in oldMessages">
 				<li class="left clearfix"
@@ -40,7 +40,7 @@
 							<strong class="primary-font">{{message.fromUser.firstName}}
 								{{message.fromUser.lastName}}</strong> <small
 								class="pull-right text-muted"> <i
-								class="fa fa-clock-o fa-fw"></i> 12 mins ago
+								class="fa fa-clock-o fa-fw"></i> {{message.delai}}
 							</small>
 						</div>
 						<p>{{message.text}}</p>
@@ -54,7 +54,7 @@
 					<div class="chat-body clearfix">
 						<div class="header">
 							<small class=" text-muted"> <i
-								class="fa fa-clock-o fa-fw"></i> 13 mins ago
+								class="fa fa-clock-o fa-fw"></i> {{message.delai}}
 							</small> <strong class="pull-right primary-font">{{message.fromUser.firstName}}
 								{{message.fromUser.lastName}}</strong>
 						</div>
@@ -70,7 +70,7 @@
 				placeholder="Type your message here..." data-ng-model="textMsg" />
 			<span class="input-group-btn">
 				<button class="btn btn-warning btn-sm" id="btn-chat"
-					data-ng-click="sendMessage()">Send</button>
+					data-ng-click="sendMessage()" ng-disabled="textMsg == ''">Send</button>
 			</span>
 		</div>
 	</div>

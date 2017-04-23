@@ -1,4 +1,4 @@
-package com.hediapps.rest;
+package com.hediapps.websocket;
 
 import java.util.Date;
 

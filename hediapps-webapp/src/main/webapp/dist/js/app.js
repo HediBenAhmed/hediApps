@@ -1,5 +1,5 @@
-var app = angular.module('myApp', [ 'ngRoute', 'ngCookies', 'myApp.services',
-		'chartwdg', 'tablewdg', 'chatwdg' ]);
+var app = angular.module('myApp', [ 'ngRoute', 'ngCookies', 'luegg.directives',
+		'myApp.services', 'chartwdg', 'tablewdg', 'chatwdg' ]);
 app
 		.config(
 				[
