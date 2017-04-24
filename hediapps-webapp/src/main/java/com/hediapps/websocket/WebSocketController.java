@@ -7,13 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 
 import com.hediapps.rest.transfer.MessageTransfer;
 
 @Controller
-@EnableScheduling
+//@EnableScheduling
 public class WebSocketController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
