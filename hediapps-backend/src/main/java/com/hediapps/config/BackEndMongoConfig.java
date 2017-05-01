@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
@@ -41,22 +40,23 @@ public class BackEndMongoConfig extends AbstractMongoConfiguration {
 	}
 
 	@Override
-	public Mongo mongo() {
-		return new MongoClient(this.host, this.port);
+	public MongoClient mongo() {
+		// Set credentials
+		MongoCredential credential = MongoCredential.createCredential(userName,
+				dbName, password.toCharArray());
+		ServerAddress serverAddress = new ServerAddress(host, port);
+
+		// Mongo Client
+		return new MongoClient(serverAddress, Arrays.asList(credential));
 	}
 
 	@Override
 	@Bean
 	public MongoDbFactory mongoDbFactory() {
-		// Set credentials
-		MongoCredential credential = MongoCredential.createCredential(userName, dbName, password.toCharArray());
-		ServerAddress serverAddress = new ServerAddress(host, port);
-
-		// Mongo Client
-		MongoClient mongoClient = new MongoClient(serverAddress, Arrays.asList(credential));
 
 		// Mongo DB Factory
-		SimpleMongoDbFactory simpleMongoDbFactory = new SimpleMongoDbFactory(mongoClient, dbName);
+		SimpleMongoDbFactory simpleMongoDbFactory = new SimpleMongoDbFactory(
+				mongo(), dbName);
 
 		return simpleMongoDbFactory;
 	}
