@@ -15,16 +15,16 @@ public class UserEventHandler {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@HandleBeforeCreate
 	public void handleUserCreate(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setClientSecret(passwordEncoder.encode(user.getClientSecret()));
 	}
 
 	@HandleBeforeSave
 	public void handleUserUpdate(User user) {
 
 		// password change request
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setClientSecret(passwordEncoder.encode(user.getClientSecret()));
 	}
 }

@@ -14,6 +14,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, String>
 	@PreAuthorize("#oauth2.hasScope('write')")
 	public <S extends User> S save(S entity);
 
-	User findOneByEmail(@Param("email") String email);
+	User findOneByClientId(@Param("clientId") String clientId);
 
 }
