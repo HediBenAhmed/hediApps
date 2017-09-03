@@ -33,8 +33,8 @@ public class UserTransfer {
 		this.id = user.getId();
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
-		this.email = user.getEmail();
-		this.roles = (Set<Role>) user.getAuthorities();
+		this.email = user.getClientId();
+		//this.roles = (Set<Role>) user.getAuthorities();
 		this.newMessages = newMessages;
 		this.currentTasks = currentTasks;
 	}

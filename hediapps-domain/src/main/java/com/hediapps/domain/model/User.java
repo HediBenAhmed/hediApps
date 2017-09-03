@@ -1,16 +1,18 @@
 package com.hediapps.domain.model;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.provider.ClientDetails;
 
 @Document(collection = "users")
-public class User implements UserDetails {
+public class User implements ClientDetails {
 	/**
 	 * 
 	 */
@@ -23,34 +25,19 @@ public class User implements UserDetails {
 
 	private String lastName;
 
-	private String password;
-	private String email;
+	private String clientId;
+	private String clientSecret;
+
+	private Set<String> resourceIds;
+
+	private Set<String> scope;
+
+	private Set<String> authorizedGrantTypes;
 
 	private Set<Role> authorities = new HashSet<Role>();
 
-	private boolean credentialsNonExpired;
-	private boolean enabled;
-	private boolean accountNonLocked;
-	private boolean accountNonExpired;
-
 	public User() {
 		super();
-	}
-
-	public User(String id, String firstName, String lastName, String password, String email, boolean enabled,
-			Set<Role> authorities) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.email = email;
-		this.credentialsNonExpired = true;
-		this.enabled = true;
-		this.accountNonExpired = true;
-		this.accountNonLocked = true;
-		this.enabled = enabled;
-		this.authorities = authorities;
 	}
 
 	public String getId() {
@@ -59,60 +46,6 @@ public class User implements UserDetails {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public void setAuthorities(Set<Role> authorities) {
-		this.authorities = authorities;
-	}
-
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.authorities;
-	}
-
-	public String getUsername() {
-		return this.email;
-	}
-
-	public boolean isAccountNonExpired() {
-		return this.accountNonExpired;
-	}
-
-	public boolean isAccountNonLocked() {
-		return this.accountNonLocked;
-	}
-
-	public boolean isCredentialsNonExpired() {
-		return this.credentialsNonExpired;
-	}
-
-	public boolean isEnabled() {
-		return this.enabled;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", password=" + password + ", email=" + email + ", credentialsNonExpired="
-				+ credentialsNonExpired + ", enabled=" + enabled + ", authorities=" + authorities + "]";
 	}
 
 	public String getLastName() {
@@ -129,5 +62,94 @@ public class User implements UserDetails {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	@Override
+	public String getClientId() {
+		return clientId;
+	}
+
+	@Override
+	public Set<String> getResourceIds() {
+		return resourceIds;
+	}
+
+	@Override
+	public boolean isSecretRequired() {
+		return true;
+	}
+
+	@Override
+	public String getClientSecret() {
+		return clientSecret;
+	}
+
+	@Override
+	public boolean isScoped() {
+		return true;
+	}
+
+	@Override
+	public Set<String> getScope() {
+		return scope;
+	}
+
+	@Override
+	public Set<String> getAuthorizedGrantTypes() {
+		return authorizedGrantTypes;
+	}
+
+	@Override
+	public Set<String> getRegisteredRedirectUri() {
+		return null;
+	}
+
+	@Override
+	public Integer getAccessTokenValiditySeconds() {
+		return 1000;
+	}
+
+	@Override
+	public Integer getRefreshTokenValiditySeconds() {
+		return 1000;
+	}
+
+	@Override
+	public boolean isAutoApprove(String scope) {
+		return true;
+	}
+
+	@Override
+	public Map<String, Object> getAdditionalInformation() {
+		return null;
+	}
+
+	@Override
+	public Collection<GrantedAuthority> getAuthorities() {
+		return Collections.unmodifiableCollection(authorities);
+	}
+
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+
+	public void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
+	}
+
+	public void setResourceIds(Set<String> resourceIds) {
+		this.resourceIds = resourceIds;
+	}
+
+	public void setScope(Set<String> scope) {
+		this.scope = scope;
+	}
+
+	public void setAuthorizedGrantTypes(Set<String> authorizedGrantTypes) {
+		this.authorizedGrantTypes = authorizedGrantTypes;
+	}
+
+	public void setAuthorities(Set<Role> authorities) {
+		this.authorities = authorities;
 	}
 }
