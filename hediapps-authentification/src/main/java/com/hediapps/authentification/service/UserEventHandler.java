@@ -18,13 +18,13 @@ public class UserEventHandler {
 
 	@HandleBeforeCreate
 	public void handleUserCreate(User user) {
-		user.setClientSecret(passwordEncoder.encode(user.getClientSecret()));
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 	}
 
 	@HandleBeforeSave
 	public void handleUserUpdate(User user) {
 
 		// password change request
-		user.setClientSecret(passwordEncoder.encode(user.getClientSecret()));
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 	}
 }

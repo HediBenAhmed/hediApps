@@ -1,7 +1,7 @@
 package com.hediapps.authentification.service;
 
-import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface AuthentificationService extends ClientDetailsService{
+public interface AuthentificationService extends UserDetailsService{
 
 }
