@@ -31,5 +31,4 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
 				.secret("secret").resourceIds(RestApiResourceServerConfiguration.RESOURCE_ID);
 		// @formatter:on
 	}
-
 }
