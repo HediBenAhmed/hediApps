@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.hediapps.domain.model.User;
+import com.hediapps.authentification.domain.model.User;
 
 @Component
 @RepositoryEventHandler(User.class)
