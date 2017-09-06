@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
 	HttpModule
   ],
-  providers: [EurekaClientService, authentificationService],
+  providers: [EurekaClientService, authentificationService, WebSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
