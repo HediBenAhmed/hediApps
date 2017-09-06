@@ -1,7 +1,7 @@
 import { Injectable } from '@angularcore';
 
 @Injectable()
-export class authentificationService{
+export class AuthentificationService{
 	authApiName: string = 'hediapps-authentification';
 	authApiRoot: string = null;
 	
