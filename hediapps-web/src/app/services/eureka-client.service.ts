@@ -17,7 +17,10 @@ export class EurekaClientService{
 	}
 	
 	private handleError(error: any): Promise<any> {
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/HediBenAhmed/hediApps.git
 		return Promise.reject(error.message || error);
 	}
 }
