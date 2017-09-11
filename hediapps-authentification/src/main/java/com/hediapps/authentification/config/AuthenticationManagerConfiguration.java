@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.hediapps.authentification.service.AuthentificationService;
 
 @Configuration
-//@Order(Ordered.HIGHEST_PRECEDENCE)
 public class AuthenticationManagerConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
 	@Autowired

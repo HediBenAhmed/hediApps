@@ -6,20 +6,29 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 
-@Configuration
-@EnableResourceServer
-public class RestApiResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-
-	public static final String RESOURCE_ID = "hediapps";
-
-	@Override
-	public void configure(ResourceServerSecurityConfigurer resources) {
-		resources.resourceId(RESOURCE_ID);
-	}
-
-	@Override
-	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().permitAll();
-	}
-
+//@Configuration
+//@EnableResourceServer
+public class RestApiResourceServerConfiguration {/*
+													 * extends
+													 * ResourceServerConfigurerAdapter
+													 * {
+													 * 
+													 * public static final
+													 * String RESOURCE_ID =
+													 * "hediapps";
+													 * 
+													 * @Override public void
+													 * configure(
+													 * ResourceServerSecurityConfigurer
+													 * resources) {
+													 * resources.resourceId(
+													 * RESOURCE_ID); }
+													 * 
+													 * @Override public void
+													 * configure(HttpSecurity
+													 * http) throws Exception {
+													 * http.authorizeRequests().
+													 * anyRequest().permitAll();
+													 * }
+													 */
 }

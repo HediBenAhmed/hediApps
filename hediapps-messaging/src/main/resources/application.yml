@@ -3,7 +3,10 @@ security:
     enabled: false
   oauth2:
     resource:
-      user-info-uri: http://localhost:8080/userinfo
+      user-info-uri: http://localhost:8765/api/hediapps-authentification/userinfos
+management:
+  security:
+    enabled: false
 spring:
   data:
     mongodb:

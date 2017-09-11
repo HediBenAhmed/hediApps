@@ -1,6 +1,9 @@
 security:
   basic:
     enabled: false
+management:
+  security:
+    enabled: false
 spring:
   data:
     mongodb:
@@ -14,12 +17,14 @@ spring:
         format_sql: true
         type: trace
   application:
-    name: hediapps-authentification
+    name: uaa-service
 eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://user:password@localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 server:
   port: 8080
+  context-path: /uaa
+  use-forward-headers: false
