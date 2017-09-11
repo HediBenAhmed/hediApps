@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthentificationController {
 
-	@RequestMapping(path = "/userinfo", method = RequestMethod.GET)
+	@RequestMapping(path = "/userinfos", method = RequestMethod.GET)
 	Object userinfo(Authentication authentication) {
 		return authentication;
 	}
