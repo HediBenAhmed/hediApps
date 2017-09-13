@@ -27,7 +27,7 @@ public class ZuulServerApplication {
 	}
 
 	@Bean
-	UserInfoRestTemplateCustomizer userInfoRestTemplateCustomizer(SpringClientFactory springClientFactory) {
+	public UserInfoRestTemplateCustomizer userInfoRestTemplateCustomizer(SpringClientFactory springClientFactory) {
 		return template -> {
 			AccessTokenProviderChain accessTokenProviderChain = Stream
 					.of(new AuthorizationCodeAccessTokenProvider(), new ImplicitAccessTokenProvider(),

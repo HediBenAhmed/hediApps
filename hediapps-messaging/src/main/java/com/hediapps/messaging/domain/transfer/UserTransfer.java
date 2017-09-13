@@ -7,9 +7,6 @@ public class UserTransfer {
 	private String lastName;
 	private String email;
 
-	public UserTransfer() {
-	}
-
 	public String getId() {
 		return id;
 	}

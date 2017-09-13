@@ -3,11 +3,11 @@ package com.hediapps.authentification.config;
 import java.security.KeyPair;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 @Configuration
 @EnableAuthorizationServer
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter {
 
 	@Autowired
