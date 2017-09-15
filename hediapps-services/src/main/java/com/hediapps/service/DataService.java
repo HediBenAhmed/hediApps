@@ -1,7 +1,5 @@
 package com.hediapps.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,26 +16,32 @@ public class DataService {
 
 	@Transactional
 	public void create(Data t) {
-		this.dataDAO.create(t);
+		this.dataDAO.save(t);
 	}
 
 	@Transactional
 	public Data readById(long id) {
-		return this.dataDAO.findById(id);
+		return this.dataDAO.findOne(id);
 	}
 
 	@Transactional
 	public void update(Data t) {
-		this.dataDAO.update(t);
+		this.dataDAO.save(t);
 	}
 
 	@Transactional
 	public Data deleteById(Long id) {
-		return this.dataDAO.delete(id);
+		this.dataDAO.delete(id);
+		return null;
 	}
 
 	@Transactional
-	public List<Data> readAll() {
+	public Iterable<Data> readAll() {
 		return dataDAO.findAll();
+	}
+	
+	@Transactional
+	public Iterable<Data> findByName(String name) {
+		return dataDAO.searchByName(name);
 	}
 }

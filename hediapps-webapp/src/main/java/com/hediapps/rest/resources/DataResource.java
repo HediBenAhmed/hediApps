@@ -1,6 +1,8 @@
 package com.hediapps.rest.resources;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -42,14 +44,19 @@ public class DataResource {
 	public Data getData(@PathVariable long id) {
 		logger.info("Start getData. ID=" + id);
 
-		return dataService.readById(id);
+		return dataService.findByName("data1").iterator().next();
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<Data> getAllDatas() {
 		logger.info("Start getAllDatas.");
-		return dataService.readAll();
+		Iterator<Data> datasIter = dataService.readAll().iterator();
+		List<Data> copy = new ArrayList<Data>();
+		while (datasIter.hasNext())
+			copy.add(datasIter.next());
+
+		return copy;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
