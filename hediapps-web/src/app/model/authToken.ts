@@ -1,6 +1,8 @@
 export class Token {
-  access_token: string;
-  token_type: string;
-  expires_in: string;
-  scope: string;
+  public access_token: string;
+  public token_type: string;
+  public refresh_token: string;
+  public expires_in: number;
+  public scope: string;
+  public jti: string;
 }

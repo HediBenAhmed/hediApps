@@ -15,8 +15,9 @@ export class AuthentificationComponent {
   constructor(private authentificationService: AuthentificationService) {}
 
   login(): void {
-    this.authentificationService.authentificate(this.username, this.password).then(function(token: Token) {
-      console.log(token);
+    this.authentificationService.authenticate(this.username, this.password).then(function(response) {
+      console.log(response.token);
+      console.log(response.user);
     });
   }
 }

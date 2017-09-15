@@ -19,9 +19,16 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+		"../bower_components/bootstrap/dist/css/bootstrap.min.css",
+		"../bower_components/font-awesome/css/font-awesome.min.css",
+		"../bower_components/sb-admin-2/dist/css/sb-admin-2.css"
       ],
-      "scripts": [],
+      "scripts": [
+		"../bower_components/jquery/dist/jquery.min.js",
+		"../bower_components/bootstrap/dist/js/bootstrap.min.js",
+		"../bower_components/sb-admin-2/dist/js/sb-admin-2.js"
+	  ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {StompConfig, StompService} from '@stomp/ng2-stompjs';
 
@@ -39,7 +40,7 @@ const stompConfig: StompConfig = {
   declarations: [
     AppComponent, ChatComponent, AuthentificationComponent],
   imports: [
-    BrowserModule, HttpModule
+    BrowserModule, HttpModule, FormsModule
   ],
   providers: [EurekaClientService, AuthentificationService, WebSocketService, StompService,
     {

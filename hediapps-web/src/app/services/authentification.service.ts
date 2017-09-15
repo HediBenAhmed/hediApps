@@ -1,28 +1,35 @@
 import {Token} from '../model/authToken';
 import {User} from '../model/user';
-import {EurekaClientService} from './eureka-client.service';
 import {Injectable} from '@angular/core';
-import {Headers, Http} from '@angular/http';
-
+import {Http, RequestOptions, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthentificationService {
 
+  private currentUser: User;
+  private currentToken: Token;
+
   private authApiName = 'hediapps-authentification';
-  private authApiRoot = null;
+  private authApiRoot = 'http://localhost:8765/uaa';
+  private authHeaders: Headers = new Headers({'Authorization': 'Basic ' + window.btoa('client:secret')});
 
-  constructor(private http: Http, private eurekaClientService: EurekaClientService) {
-    this.eurekaClientService.getApiRoot(this.authApiName).then(url => this.authApiRoot = url);
-    alert(this.authApiRoot);
-    this.authApiRoot = 'http://localhost:8080';
-  }
+  constructor(private http: Http) {}
 
-  authentificate(username: string, password: string): Promise<Token> {
+  authenticate(username: string, password: string): Promise<{token: Token, user: User}> {
     const url = `${this.authApiRoot}/oauth/token?grant_type=password&username=${username}&password=${password}`;
-    return this.http.get(url)
-      .toPromise()
-      .then(response => response.json().data as Token)
+
+    let authenticate: Observable<{token: Token, user: User}>;
+    authenticate = this.http.post(url, null, new RequestOptions({headers: this.authHeaders}))
+      .map(response => response.json() as Token)
+      .mergeMap(token => this.http.get(`${this.authApiRoot}/userinfos`,
+        {headers: new Headers({'Authorization': `Bearer ${token.access_token}`})})
+        .map(response => {const user = response.json() as User; return {token, user}}));
+
+    return authenticate.toPromise().then(response => {this.currentToken = response.token; this.currentUser = response.user; return response; })
       .catch(this.handleError);
   }
 
@@ -32,11 +39,19 @@ export class AuthentificationService {
     const url = `${this.authApiRoot}/userinfos`;
     return this.http.get(url, {headers: auth})
       .toPromise()
-      .then(response => response.json().data.userAuthentication.principal as User)
+      .then(response => response.json().userAuthentication.principal as User)
       .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
     return Promise.reject(error.message || error);
+  }
+
+  public getCurrentUser(): User {
+    return this.currentUser;
+  }
+
+  public getCurrentToken(): Token {
+    return this.currentToken;
   }
 }
