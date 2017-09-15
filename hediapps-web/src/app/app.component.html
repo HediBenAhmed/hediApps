@@ -2,27 +2,24 @@
 <html lang="en">
 
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+<title>SB Admin 2 - Bootstrap Admin Theme</title>
 </head>
 
 <body>
 
-    <div id="wrapper">
+	<div id="wrapper">
 
-        <div id="page-wrapper">
-			<app-login></app-login>
-        </div>
-        <!-- /#page-wrapper -->
+		<div id="page-wrapper">
+			<router-outlet></router-outlet>
+		</div>
+		<!-- /#page-wrapper -->
 
-    </div>
-    <!-- /#wrapper -->
+	</div>
+	<!-- /#wrapper -->
 </body>
 
 </html>

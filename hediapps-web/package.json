@@ -39,6 +39,7 @@
     "@types/xml2js": "^0.4.0",
     "angular-ide": "^0.9.31",
     "codelyzer": "~3.0.1",
+    "font-awesome": "^4.7.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",

@@ -3,10 +3,11 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {StompConfig, StompService} from '@stomp/ng2-stompjs';
+import {RouterModule, Routes} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {ChatComponent} from './chat-component/chat.component';
-import { AuthentificationComponent } from './authentification-component/authentification.component';
+import {AuthentificationComponent} from './authentification-component/authentification.component';
 import {AuthentificationService} from './services/authentification.service';
 import {EurekaClientService} from './services/eureka-client.service';
 import {WebSocketService} from './services/websocket.service';
@@ -15,7 +16,7 @@ const stompConfig: StompConfig = {
   // Which server?
   url: 'ws://127.0.0.1:8081/hediapps-messaging',
 
-  // Headers
+  // Header
   // Typical keys: login, passcode, host
   headers: {
     login: 'client',
@@ -36,11 +37,18 @@ const stompConfig: StompConfig = {
   debug: true
 };
 
+const appRoutes: Routes = [
+  {path: '', component: AuthentificationComponent}
+];
+
 @NgModule({
   declarations: [
     AppComponent, ChatComponent, AuthentificationComponent],
   imports: [
-    BrowserModule, HttpModule, FormsModule
+    BrowserModule, RouterModule.forRoot(
+      appRoutes,
+      {enableTracing: true} // <-- debugging purposes only
+    ), HttpModule, FormsModule
   ],
   providers: [EurekaClientService, AuthentificationService, WebSocketService, StompService,
     {

@@ -20,14 +20,14 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-		"../bower_components/bootstrap/dist/css/bootstrap.min.css",
-		"../bower_components/font-awesome/css/font-awesome.min.css",
-		"../bower_components/sb-admin-2/dist/css/sb-admin-2.css"
+		"../node_modules/bootstrap/dist/css/bootstrap.min.css",
+		"../custom_components/font-awesome/less/font-awesome.less",
+		"../custom_components/sb-admin-2/dist/css/sb-admin-2.css"
       ],
       "scripts": [
-		"../bower_components/jquery/dist/jquery.min.js",
-		"../bower_components/bootstrap/dist/js/bootstrap.min.js",
-		"../bower_components/sb-admin-2/dist/js/sb-admin-2.js"
+		"../node_modules/jquery/dist/jquery.min.js",
+		"../node_modules/bootstrap/dist/js/bootstrap.min.js",
+		"../custom_components/sb-admin-2/dist/js/sb-admin-2.js"
 	  ],
       "environmentSource": "environments/environment.ts",
       "environments": {
