@@ -1,6 +1,8 @@
 import {Token} from '../model/authToken';
 import {AuthentificationService} from '../services/authentification.service';
 import {Component} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {CookieService} from 'ngx-cookie';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +14,18 @@ export class AuthentificationComponent {
   password: string;
   rememberMe: boolean;
 
-  constructor(private authentificationService: AuthentificationService) {}
+  constructor(private authentificationService: AuthentificationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private cookieService: CookieService) {
+  }
 
   login(): void {
-    this.authentificationService.authenticate(this.username, this.password).then(function(response) {
+    this.router.navigate(['/']);
+    this.authentificationService.authenticate(this.username, this.password).then(response => {
       console.log(response.token);
-      console.log(response.user);
+      this.cookieService.putObject('hediapps', response);
+      this.router.navigate(['/']);
     });
   }
 }
