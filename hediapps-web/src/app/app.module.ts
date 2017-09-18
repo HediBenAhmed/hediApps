@@ -4,10 +4,13 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {StompConfig, StompService} from '@stomp/ng2-stompjs';
 import {RouterModule, Routes} from '@angular/router';
+import {CookieModule} from 'ngx-cookie';
 
 import {AppComponent} from './app.component';
 import {ChatComponent} from './chat-component/chat.component';
 import {AuthentificationComponent} from './authentification-component/authentification.component';
+import {DashboardComponent} from './dashboard-component/dashboard.component';
+import {AuthGuardService} from './services/authGuard.service';
 import {AuthentificationService} from './services/authentification.service';
 import {EurekaClientService} from './services/eureka-client.service';
 import {WebSocketService} from './services/websocket.service';
@@ -38,19 +41,25 @@ const stompConfig: StompConfig = {
 };
 
 const appRoutes: Routes = [
-  {path: '', component: AuthentificationComponent}
+  {path: 'login', component: AuthentificationComponent},
+
+  // home route protected by auth guard
+  {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
+
+  // otherwise redirect to home
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
   declarations: [
-    AppComponent, ChatComponent, AuthentificationComponent],
+    AppComponent, ChatComponent, AuthentificationComponent, DashboardComponent],
   imports: [
     BrowserModule, RouterModule.forRoot(
       appRoutes,
-      {enableTracing: true} // <-- debugging purposes only
-    ), HttpModule, FormsModule
+      {enableTracing: false} // <-- debugging purposes only
+    ), CookieModule.forRoot(), HttpModule, FormsModule
   ],
-  providers: [EurekaClientService, AuthentificationService, WebSocketService, StompService,
+  providers: [EurekaClientService, AuthentificationService, AuthGuardService, WebSocketService, StompService,
     {
       provide: StompConfig,
       useValue: stompConfig
