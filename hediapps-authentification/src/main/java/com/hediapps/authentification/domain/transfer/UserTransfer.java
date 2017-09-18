@@ -1,4 +1,4 @@
-package com.hediapps.messaging.domain.transfer;
+package com.hediapps.authentification.domain.transfer;
 
 public class UserTransfer {
 

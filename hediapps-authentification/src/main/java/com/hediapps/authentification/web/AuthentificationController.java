@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hediapps.authentification.domain.model.User;
+import com.hediapps.authentification.domain.transfer.UserTransfer;
 import com.hediapps.authentification.service.UserRepository;
-import com.hediapps.messaging.domain.transfer.UserTransfer;
 
 @RestController
 public class AuthentificationController {
