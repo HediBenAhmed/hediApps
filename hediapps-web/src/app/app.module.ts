@@ -45,11 +45,15 @@ const appRoutes: Routes = [
   {path: 'login', component: AuthentificationComponent},
 
   // home route protected by auth guard
+<<<<<<< HEAD
   {path: '', component: HomeComponent, canActivate: [AuthGuardService],
 	children: [
       {path: '', component: DashboardComponent},
 	  {path: '**', redirectTo: ''}
     ]},
+=======
+  {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
+>>>>>>> branch 'master' of https://github.com/HediBenAhmed/hediApps
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}
@@ -57,7 +61,11 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
+<<<<<<< HEAD
     AppComponent, ChatComponent, AuthentificationComponent, HomeComponent, DashboardComponent],
+=======
+    AppComponent, ChatComponent, AuthentificationComponent, DashboardComponent],
+>>>>>>> branch 'master' of https://github.com/HediBenAhmed/hediApps
   imports: [
     BrowserModule, RouterModule.forRoot(
       appRoutes,
