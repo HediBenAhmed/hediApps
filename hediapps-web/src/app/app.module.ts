@@ -9,6 +9,7 @@ import {CookieModule} from 'ngx-cookie';
 import {AppComponent} from './app.component';
 import {ChatComponent} from './chat-component/chat.component';
 import {AuthentificationComponent} from './authentification-component/authentification.component';
+import {HomeComponent} from './home-component/home.component';
 import {DashboardComponent} from './dashboard-component/dashboard.component';
 import {AuthGuardService} from './services/authGuard.service';
 import {AuthentificationService} from './services/authentification.service';
@@ -44,7 +45,13 @@ const appRoutes: Routes = [
   {path: 'login', component: AuthentificationComponent},
 
   // home route protected by auth guard
-  {path: '', component: DashboardComponent, canActivate: [AuthGuardService]},
+  {
+    path: '', component: HomeComponent, canActivate: [AuthGuardService],
+    children: [
+      {path: '', component: DashboardComponent},
+      {path: '**', redirectTo: ''}
+    ]
+  },
 
   // otherwise redirect to home
   {path: '**', redirectTo: ''}
@@ -52,7 +59,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, ChatComponent, AuthentificationComponent, DashboardComponent],
+    AppComponent, AuthentificationComponent, HomeComponent, DashboardComponent, ChatComponent],
   imports: [
     BrowserModule, RouterModule.forRoot(
       appRoutes,

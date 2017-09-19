@@ -13,10 +13,4 @@ export class DashboardComponent {
   constructor(private authentificationService: AuthentificationService,
     private cookieService: CookieService,
     private router: Router) {}
-
-  logout(): void {
-    this.cookieService.remove('hediapps');
-    //redirect
-    this.router.navigate(['/login']);
-  }
 }

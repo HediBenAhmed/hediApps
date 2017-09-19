@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "hediapps-web "
+    "name": "hediapps-web"
   },
   "apps": [
     {
@@ -22,11 +22,14 @@
         "styles.css",
 		"../node_modules/bootstrap/dist/css/bootstrap.min.css",
 		"../node_modules/font-awesome/less/font-awesome.less",
+		"../node_modules/metismenu/dist/metisMenu.min.css",
 		"../custom_modules/sb-admin-2/dist/css/sb-admin-2.css"
       ],
       "scripts": [
 		"../node_modules/jquery/dist/jquery.min.js",
 		"../node_modules/bootstrap/dist/js/bootstrap.min.js",
+		"../node_modules/metismenu/dist/metisMenu.min.js",
+		"../node_modules/chartjs/Chart.js",
 		"../custom_modules/sb-admin-2/dist/js/sb-admin-2.js"
 	  ],
       "environmentSource": "environments/environment.ts",

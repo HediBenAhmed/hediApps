@@ -23,6 +23,10 @@ zuul:
       sensitiveHeaders:
       path: /uaa/**
       stripPrefix: false
+    messaging-service:
+      sensitiveHeaders:
+      path: /messages/**
+      stripPrefix: false
   add-proxy-headers: true
 management:
   security:
