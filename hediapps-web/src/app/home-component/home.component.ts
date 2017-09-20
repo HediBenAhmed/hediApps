@@ -25,6 +25,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     const cookie: {token: Token, user: User} = this.cookieService.getObject('hediapps') as {token: Token, user: User};
     this.currentUser = cookie.user;
+
+    this.getMessages();
+    this.getTasks();
   }
 
   logout(): void {
@@ -32,7 +35,11 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  private getMessages(): Message[] {
-    return null;
+  private getMessages() {
+    this.messages = [];
+  }
+
+  private getTasks() {
+    this.tasks = [];
   }
 }

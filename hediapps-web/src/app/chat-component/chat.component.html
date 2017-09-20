@@ -26,11 +26,11 @@
 		</div>
 	</div>
 	<!-- /.panel-heading -->
-	<div class="panel-body" id="chatBody" scroll-glue>
+	<div class="panel-body" id="chatBody">
 		<ul class="chat">
-			<div data-ng-repeat="message in oldMessages">
+			<div *ngFor="let message of oldMessages">
 				<li class="left clearfix"
-					data-ng-if="$root.user.email != message.fromUser.email"><span
+					*ngIf="currentUser.email != message.fromUser.email"><span
 					class="chat-img pull-left"> <img
 						src="http://placehold.it/50/55C1E7/fff" alt="User Avatar"
 						class="img-circle" />
@@ -46,7 +46,7 @@
 						<p>{{message.text}}</p>
 					</div></li>
 				<li class="right clearfix"
-					data-ng-if="$root.user.email == message.fromUser.email"><span
+					*ngIf="currentUser.email == message.fromUser.email"><span
 					class="chat-img pull-right"> <img
 						src="http://placehold.it/50/FA6F57/fff" alt="User Avatar"
 						class="img-circle" />
@@ -67,10 +67,10 @@
 	<div class="panel-footer">
 		<div class="input-group">
 			<input id="btn-input" type="text" class="form-control input-sm"
-				placeholder="Type your message here..." data-ng-model="textMsg" />
+				placeholder="Type your message here..." [(ngModel)]="textMsg" />
 			<span class="input-group-btn">
 				<button class="btn btn-warning btn-sm" id="btn-chat"
-					data-ng-click="sendMessage()" ng-disabled="textMsg == ''">Send</button>
+					(click)="sendMessage()" [disabled]="textMsg == ''">Send</button>
 			</span>
 		</div>
 	</div>

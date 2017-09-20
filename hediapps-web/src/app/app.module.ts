@@ -18,14 +18,11 @@ import {WebSocketService} from './services/websocket.service';
 
 const stompConfig: StompConfig = {
   // Which server?
-  url: 'ws://127.0.0.1:8081/hediapps-messaging',
+  url: 'ws://127.0.0.1:8081/messaging/ws/websocket',
 
   // Header
   // Typical keys: login, passcode, host
-  headers: {
-    login: 'client',
-    passcode: 'secret'
-  },
+  headers: {},
 
   // How often to heartbeat?
   // Interval in  milliseconds, set to 0 to disable

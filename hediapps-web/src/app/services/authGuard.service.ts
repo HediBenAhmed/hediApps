@@ -7,13 +7,11 @@ import {CookieService} from 'ngx-cookie';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  _cookieService: CookieService;
-  constructor(private router: Router, private cookieService: CookieService, private authentificationService: AuthentificationService) {
-    this._cookieService = cookieService;
-  }
+
+  constructor(private router: Router, private cookieService: CookieService, private authentificationService: AuthentificationService) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const cookie: {token: Token, user: User} = this._cookieService.getObject('hediapps') as {token: Token, user: User};
+    const cookie: {token: Token, user: User} = this.cookieService.getObject('hediapps') as {token: Token, user: User};
     console.log(cookie);
     if (cookie) {
       // logged in so return  true

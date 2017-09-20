@@ -1,7 +1,7 @@
 import {Token} from '../model/authToken';
 import {User} from '../model/user';
 import {Injectable} from '@angular/core';
-import {Http, RequestOptions, Headers, Response} from '@angular/http';
+import {Http, Headers, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
@@ -23,7 +23,7 @@ export class AuthentificationService {
     const url = `${this.authApiRoot}/oauth/token?grant_type=password&username=${username}&password=${password}`;
 
     let authenticate: Observable<{token: Token, user: User}>;
-    authenticate = this.http.post(url, null, new RequestOptions({headers: this.authHeaders}))
+    authenticate = this.http.post(url, null, {headers: this.authHeaders})
       .map(response => response.json() as Token)
       .mergeMap(token => this.http.get(`${this.authApiRoot}/userinfos`,
         {headers: new Headers({'Authorization': `Bearer ${token.access_token}`})})
@@ -33,25 +33,15 @@ export class AuthentificationService {
       .catch(this.handleError);
   }
 
-  getUserInfos(token: Token): Promise<User> {
-
-    const auth = new Headers({'Authorization': `Bearer ${token.access_token}`});
-    const url = `${this.authApiRoot}/userinfos`;
-    return this.http.get(url, {headers: auth})
-      .toPromise()
-      .then(response => response.json().userAuthentication.principal as User)
-      .catch(this.handleError);
-  }
-
-  private handleError(error: any): Promise<any> {
-    return Promise.reject(error.message || error);
-  }
-
   public getCurrentUser(): User {
     return this.currentUser;
   }
 
   public getCurrentToken(): Token {
     return this.currentToken;
+  }
+
+  private handleError(error: any): Promise<any> {
+    return Promise.reject(error.message || error);
   }
 }

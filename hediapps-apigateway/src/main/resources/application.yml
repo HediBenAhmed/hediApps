@@ -25,7 +25,7 @@ zuul:
       stripPrefix: false
     messaging-service:
       sensitiveHeaders:
-      path: /messages/**
+      path: /messaging/**
       stripPrefix: false
   add-proxy-headers: true
 management:

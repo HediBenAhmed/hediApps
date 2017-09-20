@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hediapps.messaging.domain.transfer.MessageTransfer;
 
-
 @RestController
 public class WebSocketController {
 
@@ -23,13 +22,11 @@ public class WebSocketController {
 	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
 
-	@PreAuthorize("#oauth2.hasScope('write')")
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
 		return "test";
 	}
 
-	@PreAuthorize("#oauth2.hasScope('write')")
 	@MessageMapping("/sendPublicMessage")
 	public void sendPublicMessage(MessageTransfer message) throws Exception {
 
@@ -42,12 +39,10 @@ public class WebSocketController {
 	}
 
 	@MessageMapping("/sendPrivateMessage")
-	@PreAuthorize("#oauth2.hasScope('write')")
 	public void sendPrivateMessage(MessageTransfer message) throws Exception {
 		simpMessagingTemplate.convertAndSendToUser("login@com", "/messages", message);
 	}
 
-	@PreAuthorize("#oauth2.hasScope('write')")
 	public void brodcastSystemEvents() {
 		logger.info("ping");
 		simpMessagingTemplate.convertAndSend("/topic/messages",

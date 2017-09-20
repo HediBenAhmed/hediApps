@@ -19,7 +19,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/hediapps-messaging").withSockJS();
+		registry.addEndpoint("/ws").setAllowedOrigins("*").withSockJS();
 	}
 
 //	@Override
