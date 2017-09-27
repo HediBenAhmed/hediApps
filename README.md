@@ -63,17 +63,15 @@ You can read more about Microservices here - http://martinfowler.com/articles/mi
 
 Image References from - http://martinfowler.com/articles/microservices.html
 
-## <a name="netflix-oss"></a>Netflix OSS
-
-![Netflix OSS Home Page](http://netflix.github.io/glisten/lib/img/netflix_oss.jpg)
+## Netflix OSS
 
 Netflix is one of the pioneers behind the Microservices Architecture. Not only have they successfully run Microservices in production, but they have outsourced their battle hardened framework under Netflix Open Source Software Center initiative - http://netflix.github.io/#repo
 
 You will find implementation of numerous of Netflix's Microservices platform pieces here. Here are few for your reference
-### <img src="http://netflix.github.io/assets/repos/eureka.png" width="30px"> Eureka
+### Eureka
 Microservices is somewhat like SOA platform, that there are numerous services. Each Service when it comes online registers itself with Service Registry. When some other service wants to communicate with a already registered service, they would ask the Eureka Server the base url for that service. Multiple instances of the same service could register with Eureka, in that case Eureka could help in doing Load Balancing.
 
-### <img src="http://netflix.github.io/assets/repos/zuul.png" width="30px"> Zuul
+### Zuul
 A Microservice environment needs a gateway. A Gateway is the only entity exposed to the outside world, which allows access to Microservices and does more. A Gateway could do
 * API Metering
 * Centralized Authentication/Authorization
@@ -81,7 +79,7 @@ A Microservice environment needs a gateway. A Gateway is the only entity exposed
 * etc
 *
 
-## <a name="spring-boot-overview"></a>Spring Boot Overview
+## Spring Boot Overview
 
 Folks who are familiar with Spring frameworks like Spring MVC, know spring is all about Dependency Injection and Configuration Management. While Spring is an excellent framework, it still takes quite some effort to make a Spring MVC project ready for production.
 
@@ -89,19 +87,19 @@ Spring Boot is Spring's approach towards Convention over Configuration. Spring B
 
 You can read in detail about Spring Boot here - https://spring.io/guides/gs/spring-boot/
 
-## <a name="spring-cloud-overview"></a>Spring Cloud Overview
+## Spring Cloud Overview
 
 Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state)
 
 You can read in detail about Spring Cloud here - http://projects.spring.io/spring-cloud/
 
-## <a name="spring-cloud-netflix-overview"></a>Spring Cloud Netflix Overview
+## Spring Cloud Netflix Overview
 
 Spring Cloud Netflix provides Netflix OSS integrations for Spring Boot apps through autoconfiguration and binding to the Spring Environment and other Spring programming model idioms.
 
 You can read in detail about Spring Cloud Netflix here - http://cloud.spring.io/spring-cloud-netflix/
 
-## <a name="oauth-2.0-overview"></a>OAuth 2.0 Overview
+## OAuth 2.0 Overview
 
 OAuth2 is an authorization framework that specifies different ways a third-party application can obtain limited access to determined set of resources.
 
@@ -123,6 +121,6 @@ OAuth defines four roles:
 
 To get more details of how differnt authorizations work in OAuth2, please refer to the readme at **[auth-server](auth-server/README.md)**
 
-## <a name="spring-oauth-2.0-overview"></a>Spring OAuth2 Overview
+## Spring OAuth2 Overview
 
 Spring provides nice integration between Spring security and OAuth2 providers including the ability to setup your own authorization server. Please see [Spring security with OAuth2](http://projects.spring.io/spring-security-oauth/docs/oauth2.html) for more details.
