@@ -18,7 +18,7 @@
 
 ## <a name="application-architecture"></a>Application Architecture
 
-The application consists of 5 different services
+The application consists of 5 different services:
 
 * [hediapps-eureka-server](hediapps-eureka-server/README.md) - Eureka server
 * [hediapps-authentification](hediapps-authentification/README.md) - Oauth2 authorization server
