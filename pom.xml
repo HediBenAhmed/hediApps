@@ -83,6 +83,7 @@
 		<module>hediapps-authentification</module>
 		<module>hediapps-apigateway</module>
 		<module>hediapps-messaging</module>
+		<module>hediapps-users</module>
 	</modules>
 
 	<build>
