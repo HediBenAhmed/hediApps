@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +27,7 @@ public class WebSocketController {
 	}
 
 	@MessageMapping("/sendPublicMessage")
-	public void sendPublicMessage(MessageTransfer message) throws Exception {
+	public void sendPublicMessage(MessageTransfer message) {
 
 		message.setCreationDate(new Date().getTime());
 		message.setRead(false);
@@ -39,7 +38,7 @@ public class WebSocketController {
 	}
 
 	@MessageMapping("/sendPrivateMessage")
-	public void sendPrivateMessage(MessageTransfer message) throws Exception {
+	public void sendPrivateMessage(MessageTransfer message){
 		simpMessagingTemplate.convertAndSendToUser("login@com", "/messages", message);
 	}
 

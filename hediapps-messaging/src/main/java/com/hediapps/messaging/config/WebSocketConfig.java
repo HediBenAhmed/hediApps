@@ -21,32 +21,4 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		registry.addEndpoint("/ws").setAllowedOrigins("*").withSockJS();
 	}
-
-//	@Override
-//	public void configureClientInboundChannel(ChannelRegistration registration) {
-//		registration.setInterceptors(new ChannelInterceptorAdapter() {
-//
-//			@Override
-//			public Message<?> preSend(Message<?> message, MessageChannel channel) {
-//
-//				StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-//
-//				if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-//					String user = accessor.getFirstNativeHeader("user");
-//					if (!StringUtils.isEmpty(user)) {
-//						System.out.println(user);
-//						List<GrantedAuthority> authorities = new ArrayList<>();
-//						authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-//						Authentication auth = new UsernamePasswordAuthenticationToken(user+"a", user, authorities);
-//					System.out.println(	auth.getName());
-//						SecurityContextHolder.getContext().setAuthentication(auth);
-//						accessor.setUser(auth);
-//					}
-//				}
-//
-//				return message;
-//			}
-//		});
-//	}
-
 }

@@ -2,7 +2,6 @@ package com.hediapps.authentification.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,14 +21,7 @@ public class AuthentificationServiceImpl implements AuthentificationService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) {
 		return userRepository.findOneByEmail(username);
 	}
-
-//	@Override
-//	public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-//		User user = userRepository.findOneByClientId(clientId);		
-//		return user;
-//	}
-
 }
