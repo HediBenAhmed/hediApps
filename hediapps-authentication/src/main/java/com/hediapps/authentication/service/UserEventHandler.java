@@ -1,4 +1,4 @@
-package com.hediapps.users.service;
+package com.hediapps.authentication.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.hediapps.users.domain.model.User;
+import com.hediapps.authentication.domain.model.User;
 
 @Component
 @RepositoryEventHandler(User.class)

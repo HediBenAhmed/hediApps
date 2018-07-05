@@ -1,4 +1,4 @@
-package com.hediapps.users.utils;
+package com.hediapps.datas.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

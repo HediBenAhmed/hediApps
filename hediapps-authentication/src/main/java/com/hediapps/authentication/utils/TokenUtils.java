@@ -1,11 +1,13 @@
-package com.hediapps.users.utils;
+package com.hediapps.authentication.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.codec.Hex;
 
+@UtilityClass
 public class TokenUtils {
 
 	public static final String MAGIC_KEY = "obfuscate";
