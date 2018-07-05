@@ -27,6 +27,14 @@ zuul:
       sensitiveHeaders:
       path: /messaging/**
       stripPrefix: false
+    users-service:
+      sensitiveHeaders:
+      path: /users/**
+      stripPrefix: false
+    datas-service:
+      sensitiveHeaders:
+      path: /datas/**
+      stripPrefix: false
   add-proxy-headers: true
 hystrix:
   command:

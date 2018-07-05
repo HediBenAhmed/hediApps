@@ -13,7 +13,7 @@ export class AuthentificationService {
   private currentUser: User;
   private currentToken: Token;
 
-  private authApiName = 'hediapps-authentification';
+  private authApiName = 'hediapps-authentication';
   private authApiRoot = 'http://localhost:8765/uaa';
   private authHeaders: Headers = new Headers({'Authorization': 'Basic ' + window.btoa('client:secret')});
 
