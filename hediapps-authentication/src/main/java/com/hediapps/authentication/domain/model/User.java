@@ -28,7 +28,7 @@ public class User implements UserDetails {
 	private String password;
 	private String email;
 
-	private Set<Role> authorities = new HashSet<>();
+	private Set<Role> authorities;
 
 	private boolean credentialsNonExpired;
 	private boolean enabled;

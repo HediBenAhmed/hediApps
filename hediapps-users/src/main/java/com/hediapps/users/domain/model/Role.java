@@ -1,23 +1,17 @@
 package com.hediapps.users.domain.model;
 
-import org.springframework.security.core.GrantedAuthority;
+public enum Role {
+    USER("ROLE_USER"),
+    ADMIN("ROLE_ADMIN");
+
+    private String authority;
 
 
-public enum Role implements GrantedAuthority
-{
-	USER("ROLE_USER"),
-	ADMIN("ROLE_ADMIN");
+    Role(String authority) {
+        this.authority = authority;
+    }
 
-	private String authority;
-
-
-	Role(String authority)
-	{
-		this.authority = authority;
-	}
-
-	public String getAuthority()
-	{
-		return this.authority;
-	}
+    public String getAuthority() {
+        return this.authority;
+    }
 }

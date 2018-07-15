@@ -8,11 +8,13 @@
         <artifactId>hediapps</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>hediapps-Authentication</artifactId>
-    <name>hediapps-authentication</name>
+    <artifactId>hediapps-data</artifactId>
+    <name>hediapps-data</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
@@ -23,11 +25,12 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
     </dependencies>
-
-
 </project>
