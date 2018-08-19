@@ -1,6 +1,6 @@
 import { HediappsWebPage } from './app.po';
 
-describe('hediapps-web App', () => {
+describe('hediapps-endpoint App', () => {
   let page: HediappsWebPage;
 
   beforeEach(() => {

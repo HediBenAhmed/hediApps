@@ -1,4 +1,4 @@
-package com.hediapps.authentication.service;
+package com.hediapps.data.service;
 
 import java.util.stream.Collectors;
 
