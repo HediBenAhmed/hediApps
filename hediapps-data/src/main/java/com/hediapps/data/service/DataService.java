@@ -1,8 +1,12 @@
-package com.hediapps.authentication.service;
+package com.hediapps.data.service;
 
-import com.hediapps.authentication.dto.UserDto;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import java.util.List;
+import java.util.UUID;
 
-public interface AuthenticationService extends UserDetailsService {
-    void save(UserDto user);
+import com.hediapps.data.model.DataEntity;
+
+public interface DataService {
+    DataEntity getById(String id);
+    String save(DataEntity dataEntity);
+    List<DataEntity> getAll();
 }

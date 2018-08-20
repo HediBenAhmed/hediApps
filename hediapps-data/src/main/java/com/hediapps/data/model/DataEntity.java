@@ -1,6 +1,7 @@
 package com.hediapps.data.model;
 
 import java.util.Map;
+import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "data")
-public class Data {
+public class DataEntity {
     public enum DataType {
     }
 

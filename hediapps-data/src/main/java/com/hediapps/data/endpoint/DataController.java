@@ -1,30 +1,44 @@
-package com.hediapps.authentication.endpoint;
+package com.hediapps.data.endpoint;
 
-import java.security.Principal;
+import java.util.List;
+import java.util.UUID;
 
-import com.hediapps.authentication.dto.UserDto;
-import com.hediapps.authentication.service.AuthenticationService;
+import com.hediapps.data.model.DataEntity;
+import com.hediapps.data.service.DataService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.web.util.UriComponentsBuilder.*;
+
 @RestController
 @RequiredArgsConstructor
-public class UserController {
-    private final AuthenticationService authenticationService;
+@Slf4j
+public class DataController {
 
+    private final DataService dataService;
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/current")
-    public Principal user(Principal principal) {
-        return principal;
+    @GetMapping("/{id}")
+    public DataEntity getById(@PathVariable("id") String id) {
+        return dataService.getById(id);
     }
 
-    @PostMapping("/sign-up")
-    public void signUp(@RequestBody UserDto user) {
-        authenticationService.save(user);
+    @PostMapping
+    public ResponseEntity saveData(@RequestBody DataEntity data) {
+
+        String id = dataService.save(data);
+        return created(fromUriString("/").pathSegment(id).build().toUri()).build();
     }
+
+    @GetMapping
+    public List<DataEntity> getAll() {
+        return dataService.getAll();
+    }
+
 }

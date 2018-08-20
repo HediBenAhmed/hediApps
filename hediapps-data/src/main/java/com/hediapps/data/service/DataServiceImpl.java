@@ -1,49 +1,29 @@
 package com.hediapps.data.service;
 
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.UUID;
 
-import com.hediapps.authentication.dto.AuthorityDto;
-import com.hediapps.authentication.dto.UserDto;
-import com.hediapps.authentication.mapper.UserMapper;
-import com.hediapps.authentication.model.AuthorityEntity;
-import com.hediapps.authentication.model.UserEntity;
+import com.hediapps.data.model.DataEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
-@Service("authenticationService")
+@Service("dataService")
 @RequiredArgsConstructor
-public class AuthenticationServiceImpl implements AuthenticationService {
-    private final CredentialRepository credentialRepository;
-    private final AuthorityRepository authorityRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+public class DataServiceImpl implements DataService {
+    private final DataRepository dataRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        UserEntity user = credentialRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException(username);
-        }
-        return UserMapper.INSTANCE.userEntityToUserDto(user);
+    public DataEntity getById(String id) {
+        return dataRepository.findById(id).get();
     }
 
     @Override
-    public void save(UserDto user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        UserEntity userEntity = UserMapper.INSTANCE.userDtoToUserEntity(user);
-        if (!CollectionUtils.isEmpty(user.getAuthorities())) {
-            userEntity.setAuthorities(user.getAuthorities().stream()
-                    .map(this::findAuthority)
-                    .collect(Collectors.toList()));
-        }
-
-        credentialRepository.save(userEntity);
+    public String save(DataEntity dataEntity) {
+        return dataRepository.save(dataEntity).getId();
     }
 
-    private AuthorityEntity findAuthority(AuthorityDto authorityDto) {
-        return authorityRepository.findByAuthority(authorityDto.getAuthority());
+    @Override
+    public List<DataEntity> getAll() {
+        return (List<DataEntity>) dataRepository.findAll();
     }
 }

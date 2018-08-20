@@ -11,9 +11,6 @@
     <artifactId>hediapps-apigateway</artifactId>
     <name>hediapps-apigateway</name>
     <url>http://maven.apache.org</url>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -24,7 +21,6 @@
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
@@ -32,11 +28,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 </project>
