@@ -1,9 +1,9 @@
-package com.hediapps.messaging.domain.transfer;
+package com.hediapps.messaging.dto;
 
 import lombok.Data;
 
 @Data
-public class UserTransfer {
+public class UserDto {
 
 	private String id;
 	private String firstName;

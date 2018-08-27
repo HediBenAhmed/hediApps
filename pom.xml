@@ -105,6 +105,7 @@
         <module>hediapps-users</module>
         <module>hediapps-data</module>
         <module>hediapps-cloud-config</module>
+        <module>hediapps-admin</module>
     </modules>
 
     <build>

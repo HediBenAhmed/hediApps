@@ -4,3 +4,22 @@ spring:
   cloud:
     config:
       uri: http://localhost:8088
+zuul:
+  routes:
+    messagin-service:
+      sensitiveHeaders:
+      path: /messaging/**
+      stripPrefix: false
+    uaa-service:
+      sensitiveHeaders:
+      path: /auth/**
+      stripPrefix: true
+    admin:
+      path: /admin/**
+      serviceId: admin
+  ws:
+    brokerages:
+      hello:
+        end-points: /ws
+        brokers:  /topic
+        destination-prefixes: /app
