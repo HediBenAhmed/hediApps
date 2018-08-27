@@ -1,0 +1,18 @@
+rootProject.name = 'hediapps'
+include ':hediapps-eureka-server'
+include ':hediapps-Authentication'
+include ':hediapps-apigateway'
+include ':hediapps-messaging'
+include ':hediapps-users'
+include ':hediapps-data'
+include ':hediapps-cloud-config'
+include ':hediapps-admin'
+
+project(':hediapps-eureka-server').projectDir = "$rootDir/hediapps-eureka-server" as File
+project(':hediapps-Authentication').projectDir = "$rootDir/hediapps-authentication" as File
+project(':hediapps-apigateway').projectDir = "$rootDir/hediapps-apigateway" as File
+project(':hediapps-messaging').projectDir = "$rootDir/hediapps-messaging" as File
+project(':hediapps-users').projectDir = "$rootDir/hediapps-users" as File
+project(':hediapps-data').projectDir = "$rootDir/hediapps-data" as File
+project(':hediapps-cloud-config').projectDir = "$rootDir/hediapps-cloud-config" as File
+project(':hediapps-admin').projectDir = "$rootDir/hediapps-admin" as File

@@ -1,0 +1,18 @@
+
+description = 'hediapps-authentication'
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.0.2.RELEASE'
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version:'2.0.2.RELEASE') {
+exclude(module: 'tomcat-jdbc')
+    }
+    compile group: 'mysql', name: 'mysql-connector-java', version:'5.1.46'
+    compile group: 'com.zaxxer', name: 'HikariCP', version:'3.1.0'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version:'2.0.2.RELEASE'
+    compile group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version:'2.0.0.RELEASE'
+    compile group: 'com.auth0', name: 'java-jwt', version:'3.4.0'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version:'2.0.0.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-config-client', version:'2.0.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'2.0.2.RELEASE'
+    compile group: 'org.jolokia', name: 'jolokia-core', version:'1.5.0'
+}

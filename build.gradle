@@ -1,0 +1,67 @@
+plugins {
+  id 'org.springframework.boot' version '2.0.4.RELEASE'
+}
+
+allprojects {
+  group = 'com.hedi.apps'
+  version = '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'maven-publish'
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+
+
+  repositories {
+    mavenLocal()
+
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven {
+      url myMavenRepoReadUrl
+
+      credentials {
+        username myMavenRepoReadUsername
+        password myMavenRepoReadPassword
+      }
+    }
+  }
+
+
+  dependencies {
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.2'
+    compile group: 'org.mapstruct', name: 'mapstruct-jdk8', version: '1.2.0.Final'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.2.RELEASE'
+    compileOnly group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.2.0.Final'
+  }
+
+  publishing {
+    publications {
+      "$project.name"(MavenPublication) {
+        groupId project.group
+        artifactId project.name
+        version project.version
+        from components.java
+      }
+    }
+
+    repositories {
+      maven {
+        url myMavenRepoWriteUrl
+
+        credentials {
+          username myMavenRepoWriteUsername
+          password myMavenRepoWritePassword
+        }
+      }
+    }
+  }
+}
